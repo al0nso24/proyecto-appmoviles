@@ -7,56 +7,56 @@ export default function TarjetasProductos() {
             id: 1, 
             nombre: "Chiikawa", 
             precio: 99.9, 
-            imagen: require("../../imagenes/chiikawa-peluche.jpg")
+            imagen: require("../../imagenes/chii.jpg")
         },
 
         { 
             id: 2, 
-            nombre: "Conejito Dulce", 
-            precio: 49.9, 
-            emoji: "🐰",
+            nombre: "Stormtrooper", 
+            precio: 59.9,
+            imagen: require("../../imagenes/stormtrooper.png")
         },
 
         { 
             id: 3, 
-            nombre: "Perrito Miel", 
-            precio: 54.9, 
-            emoji: "🐶",
+            nombre: "Yoshi", 
+            precio: 49.9,
+            imagen: require("../../imagenes/yoshi.jpeg")
         },
 
         { 
             id: 4, 
-            nombre: "Elefantito Nube", 
-            precio: 64.9, 
-            emoji: "🐘", 
+            nombre: "Kirby", 
+            precio: 64.9,
+            imagen: require("../../imagenes/kirby_.jpg")
         },
         
         { 
             id: 5, 
-            nombre: "Osito Beige", 
-            precio: 44.9, 
-            emoji: "🧸",
+            nombre: "Hachiware", 
+            precio: 50.9,
+            imagen: require("../../imagenes/hachiware.jpg")
         },
 
         { 
             id: 6, 
-            nombre: "Conejita Rosa", 
-            precio: 49.9, 
-            emoji: "🐰",
+            nombre: "Freddy Fazbear", 
+            precio: 79.9,
+            imagen: require("../../imagenes/fedi.jpg")
         },
 
         { 
             id: 7, 
-            nombre: "Osito Hoodie", 
-            precio: 69.9, 
-            emoji: "🧸",
+            nombre: "Triceratops", 
+            precio: 205.9,
+            imagen: require("../../imagenes/triceratops.jpg")
         },
 
         { 
             id: 8, 
-            nombre: "Gatito Kuby", 
-            precio: 54.9, 
-            emoji: "🐱",
+            nombre: "Darth Vader", 
+            precio: 54.9,
+            imagen: require("../../imagenes/darth-vader.jpg")
         }
     ];
 
@@ -88,18 +88,19 @@ export default function TarjetasProductos() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+        paddingHorizontal: 2,
+        width: "100%"  //Para que ocupe todo el ancho
     },
 
-    columnWrapper: {
-        justifyContent: "space-between",
-        marginBottom: 16,
+    columnWrapper: {  //Para definir el espacio entre tarjetas (2 por fila)
+        gap: 6,
+        marginBottom: 9,
     },
 
     card: {
-        width: "48%",
+        width: "49%",
         backgroundColor: "#f8f0ff",
-        borderRadius: 22,
+        borderRadius: 14,
         borderWidth: 1,
         borderColor: "#e5d9f7",
         shadowColor: "#000",
@@ -112,15 +113,16 @@ const styles = StyleSheet.create({
     },
 
     imagen: {
-        marginBottom: 12,
+        marginBottom: 9,
+        height: 168,
         width: "100%",
-        height: 130,
+        resizeMode: "stretch"  //Para que la imagen se estire y ocupe todo el ancho de la tarjeta (y su tamaño original)
     },
 
     nombre: {
         color: "#4d2d8d",
         fontSize: 19,
-        fontWeight: "800",
+        fontWeight: "700",
         textAlign: "center",
         marginBottom: 4,
     },
