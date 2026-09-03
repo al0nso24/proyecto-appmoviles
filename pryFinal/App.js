@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#f3eeec",  //Color principal de la página (creo :v)
     alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom: 53
   },
 });
