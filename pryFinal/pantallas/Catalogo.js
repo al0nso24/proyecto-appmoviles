@@ -5,23 +5,27 @@ import NavBar from '../src/componentes/NavBar';
 
 export default function Inicio ({ navigation }) {
     const productos = [
-        { id: 1, nombre: 'Chiikawa', precio: 'S/65.90', imagen: require('../imagenes/chiikawafondo.png')},
-        { id: 2, nombre: 'Hachiware', precio: 'S/59.90', imagen: require('../imagenes/hachifondo.png')},
-        { id: 3, nombre: 'Stormtropper', precio: 'S/59.90', imagen: require('../imagenes/stormfondo.png') },
-        { id: 4, nombre: 'Darth Vader', precio: 'S/54.90', imagen: require('../imagenes/darthfondo.png') },
-        { id: 5, nombre: 'Yoshi', precio: 'S/49.90', imagen: require('../imagenes/yoshifondo.png') },
-        { id: 6, nombre: 'Kirby', precio: 'S/65.90', imagen: require('../imagenes/kirbyfondo.png') },
-        { id: 7, nombre: 'Freddy Fazbear', precio: 'S/79.90', imagen: require('../imagenes/freddyfondo.png') },
-        { id: 8, nombre: 'Triceratops', precio: 'S/74.90', imagen: require('../imagenes/tricepfondo.png') },
+        { id: 1, nombre: 'Chiikawa', precio: 'S/65.90', categoria: 'Anime', imagen: require('../imagenes/chiikawafondo.png')},
+        { id: 2, nombre: 'Hachiware', precio: 'S/59.90', categoria: 'Anime', imagen: require('../imagenes/hachifondo.png')},
+        { id: 3, nombre: 'Stormtropper', precio: 'S/59.90', categoria: 'Peliculas', imagen: require('../imagenes/stormfondo.png') },
+        { id: 4, nombre: 'Darth Vader', precio: 'S/54.90', categoria: 'Peliculas', imagen: require('../imagenes/darthfondo.png') },
+        { id: 5, nombre: 'Yoshi', precio: 'S/49.90', categoria: 'Juegos', imagen: require('../imagenes/yoshifondo.png') },
+        { id: 6, nombre: 'Kirby', precio: 'S/65.90', categoria: 'Juegos', imagen: require('../imagenes/kirbyfondo.png') },
+        { id: 7, nombre: 'Freddy Fazbear', precio: 'S/79.90', categoria: 'Juegos', imagen: require('../imagenes/freddyfondo.png') },
+        { id: 8, nombre: 'Triceratops', precio: 'S/74.90', categoria: 'Animales', imagen: require('../imagenes/tricepfondo.png') },
     ];
 
-    const categorias = ['Todos', 'Animales', 'Anime', 'Juegos', 'Películas'];
+    const categorias = ['Todos', 'Animales', 'Anime', 'Juegos', 'Peliculas'];
 
     const [busqueda, setBusqueda] = useState('');
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos")
 
-    const productosFiltrados = productos.filter((producto) =>
-        producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
-    );
+    const productosFiltrados = productos.filter((producto) =>{
+        const productoBuscado = producto.nombre.toLowerCase().includes(busqueda.toLowerCase());
+        const categoriaBuscada = categoriaSeleccionada === "Todos" || producto.categoria === categoriaSeleccionada;
+
+        return productoBuscado && categoriaBuscada
+    });
 
     return (
         <ScrollView style={styles.contenedor}>
@@ -38,7 +42,8 @@ export default function Inicio ({ navigation }) {
 
             <View style={styles.filaCategorias}>
                 {categorias.map((categoria) => (
-                <TouchableOpacity key={categoria} style={styles.botonCategoria}>
+                <TouchableOpacity key={categoria} style={styles.botonCategoria} 
+                onPress={() => setCategoriaSeleccionada(categoria)}>
                     <Text style={styles.textoCategoria}>{categoria}</Text>
                 </TouchableOpacity>
                 ))}
