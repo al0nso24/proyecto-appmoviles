@@ -17,51 +17,53 @@ export default function Inicio ({ navigation }) {
     ];
 
     return (
-        <ScrollView style={styles.contenedor}>
-            <NavBar navigation={navigation} />
-            <View style={styles.bienvenida}>
-                <Image source={require('../imagenes/bannerinicio.png')} style={styles.imagenBanner} />
-                <Text style={styles.tituloTienda}>Tienda de Peluches - Kubi</Text>
-                <Text style={styles.subtitulo}>Descubre a tu nuevo mejor amigo</Text>
-                <TouchableOpacity style={styles.botonCatalogo} onPress={() => navigation && navigation.navigate('Catalogo')}>
-                    <Text style={styles.textoBoton}>Catálogo</Text>
-                </TouchableOpacity>
-            </View>
-            
-            <Text style={styles.tituloSeccion}>Categorías</Text>
-            <View style={styles.contenedorCategorias}>
-            <View style={styles.filaCategorias}>
-                {categorias.map((categoria) => (
-                <View key={categoria.nombre} style={styles.itemCategoria}>
-                    <TouchableOpacity style={styles.botonCategoria}>
-                        <Image source={categoria.imagen} style={styles.imagenCategoria} />
+        <View style={styles.contenedor}>
+            <ScrollView>
+                <NavBar navigation={navigation} />
+                <View style={styles.bienvenida}>
+                    <Image source={require('../imagenes/bannerinicio.png')} style={styles.imagenBanner} />
+                    <Text style={styles.tituloTienda}>Tienda de Peluches - Kubi</Text>
+                    <Text style={styles.subtitulo}>Descubre a tu nuevo mejor amigo</Text>
+                    <TouchableOpacity style={styles.botonCatalogo} onPress={() => navigation && navigation.navigate('Catalogo')}>
+                        <Text style={styles.textoBoton}>Catálogo</Text>
                     </TouchableOpacity>
-                    <Text style={styles.textoCategoria}>{categoria.nombre}</Text>
                 </View>
-                ))}
-            </View>
-            </View>
 
-            <Text style={styles.tituloSeccion}>Más Vendidos</Text>
-            <View style={styles.filaProductos}>
-                {masVendidos.map((producto) => (
-                    <TarjetaProducto
-                        key={producto.id}
-                        nombre={producto.nombre}
-                        precio={producto.precio}
-                        imagen={producto.imagen}
-                    />
-                ))}
-            </View>
+                <Text style={styles.tituloSeccion}>Categorías</Text>
+                <View style={styles.contenedorCategorias}>
+                    <View style={styles.filaCategorias}>
+                        {categorias.map((categoria) => (
+                            <View key={categoria.nombre} style={styles.itemCategoria}>
+                                <TouchableOpacity style={styles.botonCategoria}>
+                                    <Image source={categoria.imagen} style={styles.imagenCategoria} />
+                                </TouchableOpacity>
+                                <Text style={styles.textoCategoria}>{categoria.nombre}</Text>
+                            </View>
+                        ))}
+                    </View>
+                </View>
 
-            <TouchableOpacity style={styles.botonSesion} onPress={() => navigation && navigation.navigate('Login')}>
-                <Text style={styles.textoBotonSesion}>Iniciar Sesión</Text>
-            </TouchableOpacity>
+                <Text style={styles.tituloSeccion}>Más Vendidos</Text>
+                <View style={styles.filaProductos}>
+                    {masVendidos.map((producto) => (
+                        <TarjetaProducto
+                            key={producto.id}
+                            nombre={producto.nombre}
+                            precio={producto.precio}
+                            imagen={producto.imagen}
+                        />
+                    ))}
+                </View>
 
-            <TouchableOpacity style={styles.botonRegistro} onPress={() => navigation && navigation.navigate('Registro')}>
-                <Text style={styles.textoBotonRegistro}>Registrarse</Text>
-            </TouchableOpacity>
-        </ScrollView>
+                <TouchableOpacity style={styles.botonSesion} onPress={() => navigation && navigation.navigate('Login')}>
+                    <Text style={styles.textoBotonSesion}>Iniciar Sesión</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.botonRegistro} onPress={() => navigation && navigation.navigate('Registro')}>
+                    <Text style={styles.textoBotonRegistro}>Registrarse</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        </View>
     );
 }
 
@@ -70,6 +72,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF8F0',
         padding: 16,
+        paddingTop: 60, //Esto es para la separación entre página y barra superior del celular
+        paddingBottom: 60 //Esto es para la separación entre página y barra inferior del celular
     },
 
     encabezado: {

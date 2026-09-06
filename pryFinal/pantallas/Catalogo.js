@@ -30,7 +30,8 @@ export default function Catalogo ({ navigation }) {
     });
 
     return (
-        <ScrollView style={styles.contenedor}>
+        <View style={styles.contenedor}>
+            <ScrollView>
             <NavBar navigation={navigation} />
             <Image source={require('../imagenes/tiendabanner.jpg')} style={styles.imagenBanner} />
 
@@ -63,6 +64,7 @@ export default function Catalogo ({ navigation }) {
                 ))}
             </View>
         </ScrollView>
+        </View>
     );
 }
 
@@ -71,6 +73,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF8F0',
         padding: 16,
+        paddingTop: 60, //Esto es para la separación entre página y barra superior del celular
+        paddingBottom: 60 //Esto es para la separación entre página y barra inferior del celular
     },
 
     encabezado: {
