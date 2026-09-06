@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     textoAgregar: {
         color: '#383896',
         fontSize: 16,
+        marginBottom: 5,
         fontWeight: 'bold',
     },
 });
