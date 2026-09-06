@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF8F0',
         padding: 16,
     },
+    
     encabezado: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -79,16 +80,19 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 16,
     },
+
     imagenLogo: {
         width: 40,
         height: 40,
         resizeMode: 'contain',
     },
+
     logo: {
         fontSize: 20,
         fontFamily: 'DynaPuff_400Regular',
         color: '#383896',
     },
+
     imagenBanner: {
         width: '100%',
         height: 120,
@@ -96,12 +100,14 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         marginBottom: 16,
     },
+
     tituloSeccion: {
         fontSize: 18,
         fontFamily: 'DynaPuff_400Regular',
         color: '#383896',
         marginBottom: 10,
     },
+
     inputBuscador: {
         backgroundColor: '#fff',
         borderWidth: 1,
@@ -112,12 +118,14 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         fontFamily: 'MontserratAlternates_400Regular',
     },
+
     filaCategorias: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         gap: 8,
         marginBottom: 20,
     },
+
     botonCategoria: {
         backgroundColor: '#fff',
         borderWidth: 1,
@@ -126,11 +134,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderRadius: 16,
     },
+
     textoCategoria: {
         color: '#383896',
         fontFamily: 'MontserratAlternates_700Bold',
         fontSize: 13,
     },
+
     tituloCatalogo: {
         fontSize: 22,
         fontFamily: 'DynaPuff_400Regular',
@@ -138,6 +148,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         textAlign: 'center',
     },
+
     filaProductos: {
         flexDirection: 'row',
         flexWrap: 'wrap',

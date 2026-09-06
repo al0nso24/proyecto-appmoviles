@@ -8,7 +8,7 @@ export default function Inicio ({ navigation }) {
         { nombre: 'Animales', imagen: require('../imagenes/animal.png') },
         { nombre: 'Anime', imagen: require('../imagenes/anime.png') },
         { nombre: 'Juegos', imagen: require('../imagenes/games.png') },
-        { nombre: 'Películas', imagen: require('../imagenes/movie.png') },
+        { nombre: 'Peliculas', imagen: require('../imagenes/movie.png') },
     ];
 
     const masVendidos = [
