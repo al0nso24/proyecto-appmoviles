@@ -16,7 +16,7 @@ export default function TarjetaProducto({ nombre, precio, imagen }) {
     );
 }
 
-    const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     tarjeta: {
         width: '48%',
         backgroundColor: '#fff',
@@ -28,6 +28,7 @@ export default function TarjetaProducto({ nombre, precio, imagen }) {
         borderColor: '#DCC2DF',
         boxShadow: '0px 4px 4px #DCC2DF',
     },
+
     imagen: {
         width: 90,
         height: 90,
@@ -35,6 +36,7 @@ export default function TarjetaProducto({ nombre, precio, imagen }) {
         marginTop: 8,
         resizeMode: 'contain',
     },
+
     nombre: {
         fontFamily: 'MontserratAlternates_700Bold',
         color: '#383896',
@@ -42,6 +44,7 @@ export default function TarjetaProducto({ nombre, precio, imagen }) {
         textAlign: 'center',
         marginTop: 4,
     },
+
     filaPrecio: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -49,12 +52,14 @@ export default function TarjetaProducto({ nombre, precio, imagen }) {
         gap: 32,
         marginTop: 14,
     },
+
     precio: {
         fontFamily: 'MontserratAlternates_400Regular',
         color: '#383896',
         fontSize: 14,
         fontWeight: 'bold',
     },
+
     botonAgregar: {
         backgroundColor: '#DCC2DF',
         width: 28,
@@ -63,6 +68,7 @@ export default function TarjetaProducto({ nombre, precio, imagen }) {
         alignItems: 'center',
         justifyContent: 'center',
     },
+    
     textoAgregar: {
         color: '#383896',
         fontSize: 16,

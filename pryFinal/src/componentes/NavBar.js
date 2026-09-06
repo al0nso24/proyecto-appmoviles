@@ -27,21 +27,25 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 16,
     },
+
     filaLogo: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 8,
     },
+
     imagenLogo: {
         width: 40,
         height: 40,
         resizeMode: 'contain',
     },
+
     imagenTitulo: {
         width: 70,
         height: 24,
         resizeMode: 'contain',
     },
+    
     menu: {
         fontSize: 20,
         color: '#383896',

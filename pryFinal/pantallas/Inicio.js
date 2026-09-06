@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF8F0',
         padding: 16,
     },
+
     encabezado: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -80,45 +81,53 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 5,
     },
+
     imagenLogo: {
         width: 40,
         height: 40,
         resizeMode: 'contain',
     },
+
     logo: {
         fontSize: 20,
         fontFamily: 'DynaPuff_400Regular',
         color: '#383896',
         fontWeight: '600',
     },
+
     bienvenida: {
         alignItems: 'center',
         marginBottom: 24,
     },
+
     titulo: {
         fontSize: 32,
         fontFamily: 'DynaPuff_400Regular',
         color: '#383896',
         fontWeight: '900',
     },
+
     tituloTienda: {
         fontSize: 20,
         fontFamily: 'DynaPuff_400Regular',
         marginTop: 12,
         color: '#383896',
     },
+
     subtitulo: {
         fontFamily: 'MontserratAlternates_400Regular',
         color: '#555',
         marginTop: 4,
         textAlign: 'center',
     },
+
     imagenBanner: {
         width: '80%',
         height: 220,
         resizeMode: 'cover',
         marginTop: 2,
     },
+
     botonCatalogo: {
         backgroundColor: '#383896',
         paddingVertical: 12,
@@ -126,10 +135,12 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginTop: 16,
     },
+
     textoBoton: {
         color: '#fff',
         fontFamily: 'MontserratAlternates_700Bold',
     },
+
     tituloSeccion: {
         fontSize: 22,
         fontFamily: 'DynaPuff_400Regular',
@@ -137,21 +148,25 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         textAlign: 'center',
     },
+
     contenedorCategorias: {
         width: '85%',
         alignSelf: 'center',
         marginBottom: 24,
     },
+
     filaCategorias: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
     },
+
     itemCategoria: {
         width: '48%',
         alignItems: 'center',
         marginBottom: 14,
     },
+
     botonCategoria: {
         backgroundColor: '#fff',
         width: '100%',
@@ -163,11 +178,13 @@ const styles = StyleSheet.create({
         borderColor: '#DCC2DF',
         boxShadow: '0px 4px 4px #DCC2DF',
     },
+
     imagenCategoria: {
         width: 60,
         height: 60,
         resizeMode: 'contain',
     },
+
     textoCategoria: {
         color: '#383896',
         fontFamily: 'MontserratAlternates_400Regular',
@@ -175,6 +192,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginTop: 15,           
     },
+
     filaProductos: {
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -182,6 +200,7 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         
     },
+
     botonSesion: {
         backgroundColor: '#383896',
         paddingVertical: 12,
@@ -191,10 +210,12 @@ const styles = StyleSheet.create({
         width: '85%',
         alignSelf: 'center',
     },
+
     textoBotonSesion: {
         color: '#fff',
         fontFamily: 'MontserratAlternates_700Bold',
     },
+
     botonRegistro: {
         backgroundColor: '#383896',
         paddingVertical: 12,
@@ -204,6 +225,7 @@ const styles = StyleSheet.create({
         width: '85%',
         alignSelf: 'center',
     },
+    
     textoBotonRegistro: {
         color: '#fff',
         fontFamily: 'MontserratAlternates_700Bold',

@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView 
 import TarjetaProducto from '../src/componentes/TarjetaProducto';
 import NavBar from '../src/componentes/NavBar';
 
-export default function Inicio ({ navigation }) {
+export default function Catalogo ({ navigation }) {
     const productos = [
         { id: 1, nombre: 'Chiikawa', precio: 'S/65.90', categoria: 'Anime', imagen: require('../imagenes/chiikawafondo.png')},
         { id: 2, nombre: 'Hachiware', precio: 'S/59.90', categoria: 'Anime', imagen: require('../imagenes/hachifondo.png')},
@@ -18,6 +18,8 @@ export default function Inicio ({ navigation }) {
     const categorias = ['Todos', 'Animales', 'Anime', 'Juegos', 'Peliculas'];
 
     const [busqueda, setBusqueda] = useState('');
+
+    //Para el filtro de categorías
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos")
 
     const productosFiltrados = productos.filter((producto) =>{
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF8F0',
         padding: 16,
     },
-    
+
     encabezado: {
         flexDirection: 'row',
         alignItems: 'center',
