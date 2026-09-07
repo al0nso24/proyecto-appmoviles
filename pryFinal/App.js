@@ -4,6 +4,8 @@ import { MontserratAlternates_400Regular, MontserratAlternates_700Bold } from '@
 import { DynaPuff_400Regular } from '@expo-google-fonts/dynapuff';
 import Inicio from './pantallas/Inicio';
 import Catalogo from './pantallas/Catalogo';
+import Login from './pantallas/Login';
+import Registro from './pantallas/Registro';
 
 export default function App() {
   const [fuentesListas] = useFonts({
@@ -24,6 +26,14 @@ export default function App() {
 
   if(pantallaActual === 'Catalogo') {
     return <Catalogo navigation={navigation} />;
+  }
+
+  if (pantallaActual === 'Login') {
+    return <Login navigation={navigation} />;
+  }
+
+  if (pantallaActual === 'Registro') {
+    return <Registro navigation={navigation} />;
   }
 
   return <Inicio navigation={navigation} />;

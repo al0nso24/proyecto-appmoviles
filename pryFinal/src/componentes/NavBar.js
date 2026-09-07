@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function NavBar({ navigation }) {
     return (
@@ -12,7 +13,9 @@ export default function NavBar({ navigation }) {
             <Image source={require('../../imagenes/titulo.png')} style={styles.imagenTitulo} />
         </TouchableOpacity>
 
-        <Text style={styles.menu}>☰</Text>
+        <TouchableOpacity>
+            <Ionicons name="menu" size={28} color="#383896" />
+        </TouchableOpacity>
         </View>
     );
 }
@@ -44,10 +47,5 @@ const styles = StyleSheet.create({
         width: 70,
         height: 24,
         resizeMode: 'contain',
-    },
-    
-    menu: {
-        fontSize: 20,
-        color: '#383896',
     },
 });

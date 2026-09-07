@@ -1,17 +1,21 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TarjetaProducto({ nombre, precio, imagen }) {
     return (
         <View style={styles.tarjeta}>
-        <Image source={imagen} style={styles.imagen} />
-        <Text style={styles.nombre}>{nombre}</Text>
-        <View style={styles.filaPrecio}>
-            <Text style={styles.precio}>{precio}</Text>
-            <TouchableOpacity style={styles.botonAgregar}>
-            <Text style={styles.textoAgregar}>+</Text>
+            <TouchableOpacity style={styles.botonCorazon}>
+                <Ionicons name="heart-outline" size={20} color="#383896" />
             </TouchableOpacity>
-        </View>
+            <Image source={imagen} style={styles.imagen} />
+            <Text style={styles.nombre}>{nombre}</Text>
+            <View style={styles.filaPrecio}>
+                <Text style={styles.precio}>{precio}</Text>
+                <TouchableOpacity style={styles.botonAgregar}>
+                    <Text style={styles.textoAgregar}>+</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -27,6 +31,10 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderColor: '#DCC2DF',
         boxShadow: '0px 4px 4px #DCC2DF',
+    },
+
+    botonCorazon: {
+        alignSelf: 'flex-end', 
     },
 
     imagen: {

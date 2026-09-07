@@ -2,13 +2,14 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import TarjetaProducto from '../src/componentes/TarjetaProducto';
 import NavBar from '../src/componentes/NavBar';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Inicio ({ navigation }) {
     const categorias = [
-        { nombre: 'Animales', imagen: require('../imagenes/animal.png') },
-        { nombre: 'Anime', imagen: require('../imagenes/anime.png') },
-        { nombre: 'Juegos', imagen: require('../imagenes/games.png') },
-        { nombre: 'Peliculas', imagen: require('../imagenes/movie.png') },
+        { nombre: 'Animales', icono: 'paw' },
+        { nombre: 'Anime', icono: 'star-four-points-outline' },
+        { nombre: 'Juegos', icono: 'gamepad-variant-outline' },
+        { nombre: 'Películas', icono: 'movie-open-outline' },
     ];
 
     const masVendidos = [
@@ -33,12 +34,12 @@ export default function Inicio ({ navigation }) {
                 <View style={styles.contenedorCategorias}>
                     <View style={styles.filaCategorias}>
                         {categorias.map((categoria) => (
-                            <View key={categoria.nombre} style={styles.itemCategoria}>
-                                <TouchableOpacity style={styles.botonCategoria}>
-                                    <Image source={categoria.imagen} style={styles.imagenCategoria} />
-                                </TouchableOpacity>
-                                <Text style={styles.textoCategoria}>{categoria.nombre}</Text>
-                            </View>
+                        <View key={categoria.nombre} style={styles.itemCategoria}>
+                            <TouchableOpacity style={styles.botonCategoria}>
+                            <MaterialCommunityIcons name={categoria.icono} size={58} color="#383896" />
+                            </TouchableOpacity>
+                            <Text style={styles.textoCategoria}>{categoria.nombre}</Text>
+                        </View>
                         ))}
                     </View>
                 </View>
@@ -92,27 +93,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
 
-    logo: {
-        fontSize: 20,
-        fontFamily: 'DynaPuff_400Regular',
-        color: '#383896',
-        fontWeight: '600',
-    },
-
     bienvenida: {
         alignItems: 'center',
         marginBottom: 24,
     },
 
-    titulo: {
-        fontSize: 32,
-        fontFamily: 'DynaPuff_400Regular',
-        color: '#383896',
-        fontWeight: '900',
-    },
-
     tituloTienda: {
-        fontSize: 20,
+        fontSize: 28,
         fontFamily: 'DynaPuff_400Regular',
         marginTop: 12,
         color: '#383896',
@@ -174,7 +161,7 @@ const styles = StyleSheet.create({
     botonCategoria: {
         backgroundColor: '#fff',
         width: '100%',
-        aspectRatio: 1.4,        
+        aspectRatio: 1.6,        
         borderRadius: 12,
         alignItems: 'center',
         justifyContent: 'center',
@@ -183,17 +170,10 @@ const styles = StyleSheet.create({
         boxShadow: '0px 4px 4px #DCC2DF',
     },
 
-    imagenCategoria: {
-        width: 60,
-        height: 60,
-        resizeMode: 'contain',
-    },
-
     textoCategoria: {
         color: '#383896',
-        fontFamily: 'MontserratAlternates_400Regular',
+        fontFamily: 'MontserratAlternates_700Bold',
         fontSize: 14,
-        fontWeight: '600',
         marginTop: 15,           
     },
 

@@ -45,10 +45,22 @@ export default function Catalogo ({ navigation }) {
 
             <View style={styles.filaCategorias}>
                 {categorias.map((categoria) => (
-                <TouchableOpacity key={categoria} style={styles.botonCategoria} 
-                onPress={() => setCategoriaSeleccionada(categoria)}>
-                    <Text style={styles.textoCategoria}>{categoria}</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                    key={categoria}
+                    style={[
+                        styles.botonCategoria,
+                        categoriaSeleccionada === categoria && styles.botonCategoriaActivo,
+                    ]}
+                    onPress={() => setCategoriaSeleccionada(categoria)}>
+                    <Text
+                        style={[
+                        styles.textoCategoria,
+                        categoriaSeleccionada === categoria && styles.textoCategoriaActivo,
+                        ]}
+                    >
+                        {categoria}
+                    </Text>
+                    </TouchableOpacity>
                 ))}
             </View>
 
@@ -160,5 +172,13 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         marginBottom: 24,
+    },
+
+    botonCategoriaActivo: {
+        backgroundColor: '#383896',
+        borderColor: '#383896',
+    },
+        textoCategoriaActivo: {
+        color: '#fff',
     },
 });
