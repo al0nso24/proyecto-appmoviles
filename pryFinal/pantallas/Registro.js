@@ -4,40 +4,43 @@ import NavBar from '../src/componentes/NavBar';
 
 export default function Registro({ navigation }) {
     return (
-        <ScrollView style={styles.contenedor}>
-        <NavBar navigation={navigation} />
+        <View style={styles.contenedor}>
+            <ScrollView>
+                <NavBar navigation={navigation} />
 
-        <View style={styles.encabezadoLogin}>
-            <Image source={require('../imagenes/logo.png')} style={styles.imagenOso} />
-            <Text style={styles.tituloBienvenida}>Crea tu Cuenta</Text>
+                <View style={styles.encabezadoLogin}>
+                    <Image source={require('../imagenes/logo.png')} style={styles.imagenOso} />
+                    <Text style={styles.tituloBienvenida}>Crea tu Cuenta</Text>
+                </View>
+                <Text style={styles.subtitulo}>Únete a la familia Kubi</Text>
+                <Text style={styles.etiqueta}>Nombre Completo:</Text>
+                <TextInput style={styles.input} placeholder="" keyboardType="nombre-address" />
+
+                <Text style={styles.etiqueta}>Correo electrónico:</Text>
+                <TextInput style={styles.input} placeholder="" keyboardType="email-address" />
+
+                <Text style={styles.etiqueta}>Contraseña:</Text>
+                <TextInput style={styles.input} placeholder="" secureTextEntry />
+
+                <TouchableOpacity style={styles.botonIniciar}>
+                    <Text style={styles.textoBoton}>Registrar</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.textoPregunta}>Ya tienes cuenta?</Text>
+                <TouchableOpacity onPress={() => navigation && navigation.navigate('Login')}>
+                    <Text style={styles.enlace}>Inicia Sesión</Text>
+                </TouchableOpacity>
+            </ScrollView>
         </View>
-        <Text style={styles.subtitulo}>Únete a la familia Kubi</Text>
-        <Text style={styles.etiqueta}>Nombre Completo:</Text>
-        <TextInput style={styles.input} placeholder="" keyboardType="nombre-address" />
-
-        <Text style={styles.etiqueta}>Correo electrónico:</Text>
-        <TextInput style={styles.input} placeholder="" keyboardType="email-address" />
-
-        <Text style={styles.etiqueta}>Contraseña:</Text>
-        <TextInput style={styles.input} placeholder="" secureTextEntry />
-
-        <TouchableOpacity style={styles.botonIniciar}>
-            <Text style={styles.textoBoton}>Registrar</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.textoPregunta}>Ya tienes cuenta?</Text>
-        <TouchableOpacity onPress={() => navigation && navigation.navigate('Login')}>
-            <Text style={styles.enlace}>Inicia Sesión</Text>
-        </TouchableOpacity>
-        </ScrollView>
     );
-    }
+}
 
 const styles = StyleSheet.create({
     contenedor: {
         flex: 1,
         backgroundColor: '#FFF8F0',
         padding: 16,
+        paddingTop: 60
     },
     encabezadoLogin: {
         flexDirection: 'row',

@@ -4,39 +4,43 @@ import NavBar from '../src/componentes/NavBar';
 
 export default function Login({ navigation }) {
     return (
-        <ScrollView style={styles.contenedor}>
-        <NavBar navigation={navigation} />
+        <View style={styles.contenedor}>
+            <ScrollView>
+                <NavBar navigation={navigation} />
 
-        <View style={styles.encabezadoLogin}>
-            <Image source={require('../imagenes/logo.png')} style={styles.imagenOso} />
-            <Text style={styles.tituloBienvenida}>Bienvenidos a Kuby</Text>
+                <View style={styles.encabezadoLogin}>
+                    <Image source={require('../imagenes/logo.png')} style={styles.imagenOso} />
+                    <Text style={styles.tituloBienvenida}>Bienvenidos a Kuby</Text>
+                </View>
+                <Text style={styles.subtitulo}>Iniciar Sesión para continuar</Text>
+
+                <Text style={styles.etiqueta}>Correo electrónico:</Text>
+                <TextInput style={styles.input} placeholder="" keyboardType="email-address" />
+
+                <Text style={styles.etiqueta}>Contraseña:</Text>
+                <TextInput style={styles.input} placeholder="" secureTextEntry />
+
+                <TouchableOpacity style={styles.botonIniciar}>
+                    <Text style={styles.textoBoton}>Iniciar Sesión</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.textoPregunta}>¿No tienes cuenta?</Text>
+                <TouchableOpacity onPress={() => navigation && navigation.navigate('Registro')}>
+                    <Text style={styles.enlace}>Regístrate</Text>
+                </TouchableOpacity>
+            </ScrollView>
         </View>
-        <Text style={styles.subtitulo}>Iniciar Sesión para continuar</Text>
-
-        <Text style={styles.etiqueta}>Correo electrónico:</Text>
-        <TextInput style={styles.input} placeholder="" keyboardType="email-address" />
-
-        <Text style={styles.etiqueta}>Contraseña:</Text>
-        <TextInput style={styles.input} placeholder="" secureTextEntry />
-
-        <TouchableOpacity style={styles.botonIniciar}>
-            <Text style={styles.textoBoton}>Iniciar Sesión</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.textoPregunta}>¿No tienes cuenta?</Text>
-        <TouchableOpacity onPress={() => navigation && navigation.navigate('Registro')}>
-            <Text style={styles.enlace}>Regístrate</Text>
-        </TouchableOpacity>
-        </ScrollView>
     );
-    }
+}
 
 const styles = StyleSheet.create({
     contenedor: {
         flex: 1,
         backgroundColor: '#FFF8F0',
         padding: 16,
+        paddingTop: 60
     },
+
     encabezadoLogin: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -45,11 +49,13 @@ const styles = StyleSheet.create({
         marginTop: 24,
         marginBottom: 8,
     },
+
     imagenOso: {
         width: 60,
         height: 60,
         resizeMode: 'contain',
     },
+
     tituloBienvenida: {
         fontSize: 30 ,
         fontFamily: 'DynaPuff_400Regular',
@@ -57,17 +63,20 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         flexShrink: 1,
     },
+
     subtitulo: {
         fontFamily: 'MontserratAlternates_400Regular',
         color: '#333',
         textAlign: 'center',
         marginBottom: 24,
     },
+
     etiqueta: {
         fontFamily: 'MontserratAlternates_700Bold',
         color: '#383896',
         marginBottom: 6,
     },
+
     input: {
         backgroundColor: '#fff',
         borderWidth: 1,
@@ -78,6 +87,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         fontFamily: 'MontserratAlternates_400Regular',
     },
+
     botonIniciar: {
         backgroundColor: '#383896',
         paddingVertical: 14,
@@ -86,15 +96,18 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginBottom: 24,
     },
+
     textoBoton: {
         color: '#fff',
         fontFamily: 'MontserratAlternates_700Bold',
     },
+
     textoPregunta: {
         fontFamily: 'MontserratAlternates_400Regular',
         color: '#333',
         textAlign: 'center',
     },
+
     enlace: {
         fontFamily: 'MontserratAlternates_700Bold',
         color: '#383896',
