@@ -4,6 +4,7 @@ import TarjetaProducto from '../src/componentes/TarjetaProducto';
 import NavBar from '../src/componentes/NavBar';
 
 export default function Catalogo ({ navigation }) {
+    //Peluches:
     const productos = [
         { id: 1, nombre: 'Chiikawa', precio: 65.90, categoria: 'Anime', imagen: require('../imagenes/chiikawafondo.png')},
         { id: 2, nombre: 'Hachiware', precio: 59.90, categoria: 'Anime', imagen: require('../imagenes/hachifondo.png')},
