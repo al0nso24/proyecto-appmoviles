@@ -11,7 +11,7 @@ export default function TarjetaProducto({ nombre, precio, imagen }) {
             <Image source={imagen} style={styles.imagen} />
             <Text style={styles.nombre}>{nombre}</Text>
             <View style={styles.filaPrecio}>
-                <Text style={styles.precio}>{precio}</Text>
+                <Text style={styles.precio}>S/. {precio.toFixed(2)}</Text> {/*Dos decimales*/}
                 <TouchableOpacity style={styles.botonAgregar}>
                     <Text style={styles.textoAgregar}>+</Text>
                 </TouchableOpacity>

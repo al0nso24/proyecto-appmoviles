@@ -13,8 +13,8 @@ export default function Inicio ({ navigation }) {
     ];
 
     const masVendidos = [
-        { id: 1, nombre: 'Chiikawa', precio: 'S/65.90', imagen: require('../imagenes/chiikawafondo.png')},
-        { id: 2, nombre: 'Hachiware', precio: 'S/59.90', imagen: require('../imagenes/hachifondo.png')},
+        { id: 1, nombre: 'Chiikawa', precio: 65.90, imagen: require('../imagenes/chiikawafondo.png')},
+        { id: 2, nombre: 'Hachiware', precio: 59.90, imagen: require('../imagenes/hachifondo.png')},
     ];
 
     return (
