@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import TarjetaProducto from '../src/componentes/TarjetaProducto';
 import NavBar from '../src/componentes/NavBar';
+import Paginacion from '../src/componentes/Paginacion';
 
 export default function Catalogo ({ navigation }) {
     //Peluches:
@@ -33,53 +34,88 @@ export default function Catalogo ({ navigation }) {
         return productoBuscado && categoriaBuscada
     });
 
+    //Paginación:
+    //useState(1) = primera página por defecto
+    const [paginaActual, setPaginaActual] = useState(1);
+    const productosPorPagina = 8; //número máximo de peluches por página
+
+    //El total de páginas que hay
+    const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+
+    //(paginaActual - 1) * productosPorPagina = el inicio
+    //paginaActual * productosPorPagina = el final
+    const productosPaginados = productosFiltrados.slice(
+        (paginaActual - 1) * productosPorPagina,
+        paginaActual * productosPorPagina
+    )
+
+    //Resetea la página al filtrar
+    const cambiarBusqueda = (texto) => {
+        setBusqueda(texto); //actualiza el texto buscado
+        setPaginaActual(1); //vuelve a la página 1
+    };
+
+    const cambiarCategoria = (categoria) => {
+        setCategoriaSeleccionada(categoria); //cambia el filtro
+        setPaginaActual(1); //vuelve a la página 1
+    };
+
     return (
         <View style={styles.contenedor}>
             <ScrollView>
-            <NavBar navigation={navigation} />
-            <Image source={require('../imagenes/tiendabanner.jpg')} style={styles.imagenBanner} />
+                <NavBar navigation={navigation} />
+                <Image source={require('../imagenes/tiendabanner.jpg')} style={styles.imagenBanner} />
 
-            <Text style={styles.tituloSeccion}>Buscar Productos</Text>
-            <TextInput
-                style={styles.inputBuscador}
-                placeholder="Buscar..."
-                value={busqueda}
-                onChangeText={setBusqueda}
-            />
-
-            <View style={styles.filaCategorias}>
-                {categorias.map((categoria) => (
-                    <TouchableOpacity
-                    key={categoria}
-                    style={[
-                        styles.botonCategoria,
-                        categoriaSeleccionada === categoria && styles.botonCategoriaActivo,
-                    ]}
-                    onPress={() => setCategoriaSeleccionada(categoria)}>
-                    <Text
-                        style={[
-                        styles.textoCategoria,
-                        categoriaSeleccionada === categoria && styles.textoCategoriaActivo,
-                        ]}
-                    >
-                        {categoria}
-                    </Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
-
-            <Text style={styles.tituloCatalogo}>Catálogo</Text>
-            <View style={styles.filaProductos}>
-                {productosFiltrados.map((producto) => (
-                <TarjetaProducto
-                    key={producto.id}
-                    nombre={producto.nombre}
-                    precio={producto.precio}
-                    imagen={producto.imagen}
+                <Text style={styles.tituloSeccion}>Buscar Productos</Text>
+                <TextInput
+                    style={styles.inputBuscador}
+                    placeholder="Buscar..."
+                    value={busqueda}
+                    onChangeText={cambiarBusqueda}
                 />
-                ))}
-            </View>
-        </ScrollView>
+
+                <View style={styles.filaCategorias}>
+                    {categorias.map((categoria) => (
+                        <TouchableOpacity
+                            key={categoria}
+                            style={[
+                                styles.botonCategoria,
+                                categoriaSeleccionada === categoria && styles.botonCategoriaActivo,
+                            ]}
+                            onPress={() => cambiarCategoria(categoria)}>
+                            <Text
+                                style={[
+                                    styles.textoCategoria,
+                                    categoriaSeleccionada === categoria && styles.textoCategoriaActivo,
+                                ]}
+                            >
+                                {categoria}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+
+                <Text style={styles.tituloCatalogo}>Catálogo</Text>
+                <View style={styles.filaProductos}>
+                    {/*Recorre el array productosPaginados (los de la página actual, ya cortados por el slice)*/}
+                    {productosPaginados.map((producto) => (
+                        <TarjetaProducto
+                            key={producto.id}
+                            nombre={producto.nombre}
+                            precio={producto.precio}
+                            imagen={producto.imagen}
+                        />
+                    ))}
+                </View>
+
+                <Paginacion
+                    //Se llama a los parámetros del componente Paginacion.js, luego se le pasan las variables de aquí para que funcione
+                    pagActual={paginaActual}
+                    totalPag={totalPaginas}
+                    cambiarPag={setPaginaActual}>
+                </Paginacion>
+
+            </ScrollView>
         </View>
     );
 }
@@ -182,6 +218,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#383896',
         borderColor: '#383896',
     },
+    
         textoCategoriaActivo: {
         color: '#fff',
     },
