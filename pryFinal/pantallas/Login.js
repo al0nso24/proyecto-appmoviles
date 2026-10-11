@@ -1,11 +1,57 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import NavBar from '../src/componentes/NavBar';
+import ModalMensaje from '../src/componentes/ModalMensaje';
+import { useAuth } from '../src/contexto/AuthContext';
 
 export default function Login({ navigation }) {
+    const { iniciarSesion } = useAuth();
+    const [correo, setCorreo] = useState('');
+    const [password, setPassword] = useState('');
+    const [verPassword, setVerPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [cargando, setCargando] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [bienvenida, setBienvenida] = useState('');
+
+    useEffect(() => {
+        if (submitted) {
+            setCorreo('');
+            setPassword('');
+            setSubmitted(false);
+        }
+    }, [submitted]);
+
+    const manejarLogin = async () => {
+        setError('');
+        setCargando(true);
+        try {
+            const usuario = await iniciarSesion({ correo, password });
+            setSubmitted(true);
+            setBienvenida(usuario.nombre.split(' ')[0]);
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setCargando(false);
+        }
+    };
+
+    const continuar = () => {
+        setBienvenida('');
+        navigation.navigate('Inicio');
+    };
+
     return (
         <View style={styles.contenedor}>
-            <ScrollView>
+            <ModalMensaje
+                visible={bienvenida !== ''}
+                titulo={`¡Bienvenido, ${bienvenida}!`}
+                mensaje="Tus datos fueron validados correctamente."
+                textoBoton="Continuar"
+                onCerrar={continuar}
+            />
+            <ScrollView keyboardShouldPersistTaps="handled">
                 <NavBar navigation={navigation} />
 
                 <View style={styles.encabezadoLogin}>
@@ -15,13 +61,41 @@ export default function Login({ navigation }) {
                 <Text style={styles.subtitulo}>Iniciar Sesión para continuar</Text>
 
                 <Text style={styles.etiqueta}>Correo electrónico:</Text>
-                <TextInput style={styles.input} placeholder="" keyboardType="email-address" />
+                <TextInput
+                    style={styles.input}
+                    placeholder=""
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    value={correo}
+                    onChangeText={setCorreo}
+                />
 
                 <Text style={styles.etiqueta}>Contraseña:</Text>
-                <TextInput style={styles.input} placeholder="" secureTextEntry />
+                <View style={styles.campoPassword}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder=""
+                        secureTextEntry={!verPassword}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        value={password}
+                        onChangeText={setPassword}
+                        onSubmitEditing={manejarLogin}
+                    />
+                    <TouchableOpacity style={styles.ojo} onPress={() => setVerPassword(!verPassword)}>
+                        <Ionicons name={verPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#383896" />
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity style={styles.botonIniciar}>
-                    <Text style={styles.textoBoton}>Iniciar Sesión</Text>
+                {error !== '' && <Text style={styles.textoError}>{error}</Text>}
+
+                <TouchableOpacity
+                    style={[styles.botonIniciar, cargando && styles.botonDeshabilitado]}
+                    onPress={manejarLogin}
+                    disabled={cargando}
+                >
+                    {cargando ? <ActivityIndicator color="#fff" /> : <Text style={styles.textoBoton}>Iniciar Sesión</Text>}
                 </TouchableOpacity>
 
                 <Text style={styles.textoPregunta}>¿No tienes cuenta?</Text>
@@ -113,5 +187,27 @@ const styles = StyleSheet.create({
         color: '#383896',
         textAlign: 'center',
         marginTop: 4,
+    },
+
+    campoPassword: {
+        position: 'relative',
+        justifyContent: 'center',
+    },
+
+    ojo: {
+        position: 'absolute',
+        right: 14,
+        top: 10,
+    },
+
+    textoError: {
+        fontFamily: 'MontserratAlternates_400Regular',
+        color: '#C0392B',
+        textAlign: 'center',
+        marginBottom: 8,
+    },
+
+    botonDeshabilitado: {
+        opacity: 0.6,
     },
 });

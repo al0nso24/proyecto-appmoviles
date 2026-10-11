@@ -1,11 +1,67 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import NavBar from '../src/componentes/NavBar';
+import ModalMensaje from '../src/componentes/ModalMensaje';
+import { useAuth } from '../src/contexto/AuthContext';
 
 export default function Registro({ navigation }) {
+    const { registrarse } = useAuth();
+    const [nombre, setNombre] = useState('');
+    const [correo, setCorreo] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmar, setConfirmar] = useState('');
+    const [verPassword, setVerPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [cargando, setCargando] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [registrado, setRegistrado] = useState(false);
+
+    // Limpia los campos cuando el registro fue exitoso
+    useEffect(() => {
+        if (submitted) {
+            setNombre('');
+            setCorreo('');
+            setPassword('');
+            setConfirmar('');
+            setSubmitted(false);
+        }
+    }, [submitted]);
+
+    const manejarRegistro = async () => {
+        setError('');
+        if (password !== confirmar) {
+            setError('Las contraseñas no coinciden.');
+            return;
+        }
+        setCargando(true);
+        try {
+            await registrarse({ nombre, correo, password });
+            setSubmitted(true);
+            setRegistrado(true);
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setCargando(false);
+        }
+    };
+
+    const irALogin = () => {
+        setRegistrado(false);
+        navigation.navigate('Login');
+    };
+
     return (
         <View style={styles.contenedor}>
-            <ScrollView>
+            <ModalMensaje
+                visible={registrado}
+                titulo="¡Usuario registrado!"
+                mensaje="Tu cuenta fue creada correctamente. Ahora inicia sesión para continuar."
+                textoBoton="Iniciar Sesión"
+                onCerrar={irALogin}
+            />
+            
+            <ScrollView keyboardShouldPersistTaps="handled">
                 <NavBar navigation={navigation} />
 
                 <View style={styles.encabezadoLogin}>
@@ -14,16 +70,61 @@ export default function Registro({ navigation }) {
                 </View>
                 <Text style={styles.subtitulo}>Únete a la familia Kubi</Text>
                 <Text style={styles.etiqueta}>Nombre Completo:</Text>
-                <TextInput style={styles.input} placeholder="" keyboardType="nombre-address" />
+                <TextInput
+                    style={styles.input}
+                    placeholder=""
+                    autoCapitalize="words"
+                    value={nombre}
+                    onChangeText={setNombre}
+                />
 
                 <Text style={styles.etiqueta}>Correo electrónico:</Text>
-                <TextInput style={styles.input} placeholder="" keyboardType="email-address" />
+                <TextInput
+                    style={styles.input}
+                    placeholder=""
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    value={correo}
+                    onChangeText={setCorreo}
+                />
 
                 <Text style={styles.etiqueta}>Contraseña:</Text>
-                <TextInput style={styles.input} placeholder="" secureTextEntry />
+                <View style={styles.campoPassword}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Mínimo 6 caracteres"
+                        secureTextEntry={!verPassword}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        value={password}
+                        onChangeText={setPassword}
+                    />
+                    <TouchableOpacity style={styles.ojo} onPress={() => setVerPassword(!verPassword)}>
+                        <Ionicons name={verPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#383896" />
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity style={styles.botonIniciar}>
-                    <Text style={styles.textoBoton}>Registrar</Text>
+                <Text style={styles.etiqueta}>Confirmar contraseña:</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder=""
+                    secureTextEntry={!verPassword}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    value={confirmar}
+                    onChangeText={setConfirmar}
+                    onSubmitEditing={manejarRegistro}
+                />
+
+                {error !== '' && <Text style={styles.textoError}>{error}</Text>}
+
+                <TouchableOpacity
+                    style={[styles.botonIniciar, cargando && styles.botonDeshabilitado]}
+                    onPress={manejarRegistro}
+                    disabled={cargando}
+                >
+                    {cargando ? <ActivityIndicator color="#fff" /> : <Text style={styles.textoBoton}>Registrar</Text>}
                 </TouchableOpacity>
 
                 <Text style={styles.textoPregunta}>Ya tienes cuenta?</Text>
@@ -105,5 +206,27 @@ const styles = StyleSheet.create({
         color: '#383896',
         textAlign: 'center',
         marginTop: 4,
+    },
+
+    campoPassword: {
+        position: 'relative',
+        justifyContent: 'center',
+    },
+
+    ojo: {
+        position: 'absolute',
+        right: 14,
+        top: 10,
+    },
+
+    textoError: {
+        fontFamily: 'MontserratAlternates_400Regular',
+        color: '#C0392B',
+        textAlign: 'center',
+        marginBottom: 8,
+    },
+
+    botonDeshabilitado: {
+        opacity: 0.6,
     },
 });

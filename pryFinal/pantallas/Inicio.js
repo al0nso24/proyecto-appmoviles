@@ -3,8 +3,10 @@ import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'rea
 import TarjetaProducto from '../src/componentes/TarjetaProducto';
 import NavBar from '../src/componentes/NavBar';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useAuth } from '../src/contexto/AuthContext';
 
 export default function Inicio ({ navigation }) {
+    const { usuario } = useAuth();
     const categorias = [
         { nombre: 'Animales', icono: 'paw' },
         { nombre: 'Anime', icono: 'star-four-points-outline' },
@@ -55,14 +57,17 @@ export default function Inicio ({ navigation }) {
                         />
                     ))}
                 </View>
+                {!usuario && (
+                    <>
+                        <TouchableOpacity style={styles.botonSesion} onPress={() => navigation && navigation.navigate('Login')}>
+                            <Text style={styles.textoBotonSesion}>Iniciar Sesión</Text>
+                        </TouchableOpacity>
 
-                <TouchableOpacity style={styles.botonSesion} onPress={() => navigation && navigation.navigate('Login')}>
-                    <Text style={styles.textoBotonSesion}>Iniciar Sesión</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.botonRegistro} onPress={() => navigation && navigation.navigate('Registro')}>
-                    <Text style={styles.textoBotonRegistro}>Registrarse</Text>
-                </TouchableOpacity>
+                        <TouchableOpacity style={styles.botonRegistro} onPress={() => navigation && navigation.navigate('Registro')}>
+                            <Text style={styles.textoBotonRegistro}>Registrarse</Text>
+                        </TouchableOpacity>
+                    </>
+                )}
             </ScrollView>
         </View>
     );
