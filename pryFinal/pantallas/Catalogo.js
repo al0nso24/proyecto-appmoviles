@@ -55,6 +55,7 @@ export default function Catalogo ({ navigation }) {
         setPaginaActual(1); //vuelve a la página 1
     };
 
+    //Para cambiar categoría de peluches
     const cambiarCategoria = (categoria) => {
         setCategoriaSeleccionada(categoria); //cambia el filtro
         setPaginaActual(1); //vuelve a la página 1
@@ -98,9 +99,11 @@ export default function Catalogo ({ navigation }) {
                 <Text style={styles.tituloCatalogo}>Catálogo</Text>
                 <View style={styles.filaProductos}>
                     {/*Recorre el array productosPaginados (los de la página actual, ya cortados por el slice)*/}
+                    {/*La lista de tarjetas de los peluches*/}
                     {productosPaginados.map((producto) => (
                         <TarjetaProducto
                             key={producto.id}
+                            //Esto pasa el objeto completo del producto al componente TarjetaProducto
                             producto={producto}
                             navigation={navigation}
                         />
@@ -113,7 +116,6 @@ export default function Catalogo ({ navigation }) {
                     totalPag={totalPaginas}
                     cambiarPag={setPaginaActual}>
                 </Paginacion>
-
             </ScrollView>
         </View>
     );
@@ -124,8 +126,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF8F0',
         padding: 16,
-        paddingTop: 60, //Esto es para la separación entre página y barra superior del celular
-        paddingBottom: 60 //Esto es para la separación entre página y barra inferior del celular
+        paddingTop: 60, //esto es para la separación entre página y barra superior del celular
+        paddingBottom: 60 //esto es para la separación entre página y barra inferior del celular
     },
 
     encabezado: {

@@ -6,7 +6,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAuth } from '../src/contexto/AuthContext';
 
 export default function Inicio ({ navigation }) {
+    //Se trae la info del usuario desde el contexto de autenticación
+    //useAuth() es un hook que devuelve los datos del login/usuario
     const { usuario } = useAuth();
+
+    //Categorías de los peluches
     const categorias = [
         { nombre: 'Animales', icono: 'paw' },
         { nombre: 'Anime', icono: 'star-four-points-outline' },
@@ -14,6 +18,7 @@ export default function Inicio ({ navigation }) {
         { nombre: 'Películas', icono: 'movie-open-outline' },
     ];
 
+    //Peluches más vendidos
     const masVendidos = [
         { id: 1, nombre: 'Chiikawa', precio: 65.90, imagen: require('../imagenes/chiikawafondo.png')},
         { id: 2, nombre: 'Hachiware', precio: 59.90, imagen: require('../imagenes/hachifondo.png')},
@@ -48,14 +53,18 @@ export default function Inicio ({ navigation }) {
 
                 <Text style={styles.tituloSeccion}>Más Vendidos</Text>
                 <View style={styles.filaProductos}>
+                    {/*Se pasa el parámetro "producto" de TarjetaProducto*/}
                     {masVendidos.map((producto) => (
                         <TarjetaProducto
-                            key={producto.id}
+                            key={producto.id} //id único
+                            //Esto pasa el objeto completo del producto al componente TarjetaProducto
                             producto={producto}
+                            //Parámetro de navegación
                             navigation={navigation}
                         />
                     ))}
                 </View>
+                {/*Si no hay usuario logueado, se muestran estos 2 botones*/}
                 {!usuario && (
                     <>
                         <TouchableOpacity style={styles.botonSesion} onPress={() => navigation && navigation.navigate('Login')}>
@@ -77,8 +86,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF8F0',
         padding: 16,
-        paddingTop: 60, //Esto es para la separación entre página y barra superior del celular
-        paddingBottom: 60 //Esto es para la separación entre página y barra inferior del celular
+        paddingTop: 60, //esto es para la separación entre página y barra superior del celular
+        paddingBottom: 60 //esto es para la separación entre página y barra inferior del celular
     },
 
     encabezado: {

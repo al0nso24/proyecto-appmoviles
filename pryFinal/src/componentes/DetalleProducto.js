@@ -3,7 +3,9 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import NavBar from './NavBar';
 
+//producto = el objeto del producto que se seleccinó
 export default function DetalleProducto({ navigation, producto }) {
+    //Si producto es null, la pantalla no muestra nada, solo el texto de error
     if (!producto) {
         return (
             <View style={styles.contenedor}>
@@ -11,11 +13,15 @@ export default function DetalleProducto({ navigation, producto }) {
                     No se encontró el producto.
                 </Text>
 
+                {/*Botón para regresar*/}
                 <TouchableOpacity
                     style={styles.botonVolver}
+                    //navigation.goBack() = vuelve a la pantalla anterior
                     onPress={() => navigation.goBack()}
                 >
-                    <Text style={styles.textoBoton}>Volver</Text>
+                    <Text style={styles.textoBoton}>
+                        Volver
+                    </Text>
                 </TouchableOpacity>
             </View>
         );
@@ -23,9 +29,9 @@ export default function DetalleProducto({ navigation, producto }) {
 
     return (
         <View style={styles.contenedor}>
+            {/*Usé ScrollView porque en este caso solo es una tarjeta, no una lista*/}
             <ScrollView>
                 <NavBar navigation={navigation} />
-
                 <TouchableOpacity
                     style={styles.botonRegresar}
                     onPress={() => navigation.goBack()}
@@ -42,6 +48,7 @@ export default function DetalleProducto({ navigation, producto }) {
                     <Image
                         source={producto.imagen}
                         style={styles.imagen}
+                        //Hace que la imagen se vea completa y bien encajada
                         resizeMode="contain"
                     />
                 </View>
@@ -70,9 +77,11 @@ export default function DetalleProducto({ navigation, producto }) {
                 </View>
 
                 <Text style={styles.textoPrecio}>
+                    {/*Precio con 2 decimales*/}
                     S/. {producto.precio.toFixed(2)}
                 </Text>
 
+                {/*Aún no funciona ._.*/}
                 <TouchableOpacity
                     style={styles.botonComprar}
                     onPress={() => { }}
@@ -192,3 +201,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
+
+//Psdt: Creo que esto debía estar dentro de la carpeta de pantallas :v
