@@ -2,22 +2,25 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function TarjetaProducto({ nombre, precio, imagen }) {
+//producto = el objeto completo
+//navigation = ir a la sección de "DetalleProducto"
+export default function TarjetaProducto({ producto, navigation }) {
     return (
-        <View style={styles.tarjeta}>
+        <TouchableOpacity style={styles.tarjeta}
+        onPress={() => navigation.navigate("DetalleProducto", {producto})}>
             <TouchableOpacity style={styles.botonCorazon}>
                 <Ionicons name="heart-outline" size={20} color="#383896" />
             </TouchableOpacity>
-            <Image source={imagen} style={styles.imagen} />
-            <Text style={styles.nombre}>{nombre}</Text>
+            <Image source={producto.imagen} style={styles.imagen} />
+            <Text style={styles.nombre}>{producto.nombre}</Text>
             <View style={styles.filaPrecio}>
                 {/*Dos decimales*/}
-                <Text style={styles.precio}>S/. {precio.toFixed(2)}</Text>
+                <Text style={styles.precio}>S/. {producto.precio.toFixed(2)}</Text>
                 <TouchableOpacity style={styles.botonAgregar}>
                     <Text style={styles.textoAgregar}>+</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 

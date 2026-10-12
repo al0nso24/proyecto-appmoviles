@@ -8,6 +8,7 @@ import Login from './pantallas/Login';
 import Registro from './pantallas/Registro';
 import { AuthProvider, useAuth } from './src/contexto/AuthContext';
 import Perfil from './pantallas/Perfil';
+import DetalleProducto from './src/componentes/DetalleProducto';
 
 function Pantallas() {
   const [fuentesListas] = useFonts({
@@ -18,8 +19,18 @@ function Pantallas() {
 
   const { cargando } = useAuth();
   const [pantallaActual, setPantallaActual] = useState('Inicio');
+
+  //Ver el datalle del peluche
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+  
   const navigation = {
-    navigate: (pantalla) => setPantallaActual(pantalla),
+    navigate: (pantalla, parametros) => {
+      if (pantalla === 'DetalleProducto') {
+        setProductoSeleccionado(parametros.producto);
+      }
+      setPantallaActual(pantalla);
+    },
+    goBack: () => setPantallaActual('Catalogo'), //volver a catálogo
   };
 
   if (!fuentesListas || cargando) {
@@ -28,6 +39,15 @@ function Pantallas() {
 
   if (pantallaActual === 'Catalogo') {
     return <Catalogo navigation={navigation} />;
+  }
+
+  if (pantallaActual === 'DetalleProducto') {
+    return (
+      <DetalleProducto
+        navigation={navigation}
+        producto={productoSeleccionado}
+      />
+    );
   }
 
   if (pantallaActual === 'Login') {

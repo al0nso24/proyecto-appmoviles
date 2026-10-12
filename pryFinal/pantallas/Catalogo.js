@@ -101,9 +101,8 @@ export default function Catalogo ({ navigation }) {
                     {productosPaginados.map((producto) => (
                         <TarjetaProducto
                             key={producto.id}
-                            nombre={producto.nombre}
-                            precio={producto.precio}
-                            imagen={producto.imagen}
+                            producto={producto}
+                            navigation={navigation}
                         />
                     ))}
                 </View>
