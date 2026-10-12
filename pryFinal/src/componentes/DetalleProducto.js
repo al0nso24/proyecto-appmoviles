@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    Image,
-    TouchableOpacity,
-    StyleSheet,
-    ScrollView,
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import NavBar from './NavBar';
 
@@ -45,48 +38,49 @@ export default function DetalleProducto({ navigation, producto }) {
                     <Text style={styles.textoRegresar}>Volver</Text>
                 </TouchableOpacity>
 
-                <View style={styles.tarjetaDetalle}>
+                <View style={styles.tarjetaImg}>
                     <Image
                         source={producto.imagen}
                         style={styles.imagen}
                         resizeMode="contain"
                     />
-
-                    <Text style={styles.nombre}>
-                        {producto.nombre}
-                    </Text>
-
-                    <Text style={styles.precio}>
-                        S/. {producto.precio.toFixed(2)}
-                    </Text>
-
-                    {producto.categoria && (
-                        <View style={styles.etiquetaCategoria}>
-                            <Text style={styles.textoCategoria}>
-                                {producto.categoria}
-                            </Text>
-                        </View>
-                    )}
-
-                    <Text style={styles.descripcionTitulo}>
-                        Sobre este peluche
-                    </Text>
-
-                    <Text style={styles.descripcion}>
-                        ¡Conoce a {producto.nombre}! Un peluche ideal
-                        para tu colección o para regalar a alguien especial.
-                        Descubre tu próximo compañero en Kubi.
-                    </Text>
-
-                    <TouchableOpacity
-                        style={styles.botonComprar}
-                        onPress={() => {}}
-                    >
-                        <Text style={styles.textoBoton}>
-                            Agregar al carrito
-                        </Text>
-                    </TouchableOpacity>
                 </View>
+
+                <Text style={styles.textoNombrePeluche}>
+                    {producto.nombre}
+                </Text>
+
+                <Text style={styles.descripcion}>
+                    Peluche de {producto.nombre} suave y adorable,
+                    perfecto para coleccionar, decorar tu habitación o
+                    regalar a alguien especial.
+                </Text>
+
+                <Text style={styles.textoDetalle}>Detalles</Text>
+                <View style={{ paddingLeft: 12 }}>
+                    <Text style={styles.textoinfoDetalle}>
+                        • Tamaño: 20cm
+                    </Text>
+                    <Text style={styles.textoinfoDetalle}>
+                        • Material: Felpa suave
+                    </Text>
+                    <Text style={styles.textoinfoDetalle}>
+                        • Peso: 180 g aprox.
+                    </Text>
+                </View>
+
+                <Text style={styles.textoPrecio}>
+                    S/. {producto.precio.toFixed(2)}
+                </Text>
+
+                <TouchableOpacity
+                    style={styles.botonComprar}
+                    onPress={() => { }}
+                >
+                    <Text style={styles.textoBoton}>
+                        Agregar al carrito
+                    </Text>
+                </TouchableOpacity>
             </ScrollView>
         </View>
     );
@@ -115,14 +109,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
 
-    tarjetaDetalle: {
+    tarjetaImg: {
         backgroundColor: '#FFFFFF',
         borderRadius: 16,
         padding: 20,
         alignItems: 'center',
-        borderWidth: 1.5,
-        borderColor: '#DCC2DF',
         marginBottom: 20,
+        borderWidth: 2.1,
+        borderColor: '#DCC2DF',
+        boxShadow: '0px 4px 4px #DCC2DF',
     },
 
     imagen: {
@@ -131,50 +126,41 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
 
-    nombre: {
-        fontFamily: 'DynaPuff_400Regular',
-        fontSize: 25,
-        color: '#383896',
-        textAlign: 'center',
-        marginBottom: 10,
-    },
-
-    precio: {
+    textoNombrePeluche: {
         fontFamily: 'MontserratAlternates_700Bold',
-        fontSize: 22,
+        fontSize: 35,
         color: '#383896',
         marginBottom: 12,
     },
 
-    etiquetaCategoria: {
-        backgroundColor: '#DCC2DF',
-        paddingHorizontal: 16,
-        paddingVertical: 7,
-        borderRadius: 20,
-        marginBottom: 20,
-    },
-
-    textoCategoria: {
-        color: '#383896',
-        fontFamily: 'MontserratAlternates_700Bold',
-        fontSize: 13,
-    },
-
-    descripcionTitulo: {
-        alignSelf: 'flex-start',
-        color: '#383896',
-        fontFamily: 'DynaPuff_400Regular',
-        fontSize: 18,
-        marginBottom: 8,
-    },
-
     descripcion: {
-        alignSelf: 'flex-start',
+        textAlign: "center",
         color: '#555555',
         fontFamily: 'MontserratAlternates_400Regular',
         fontSize: 14,
         lineHeight: 23,
-        marginBottom: 24,
+        marginBottom: 22,
+    },
+
+    textoDetalle: {
+        fontFamily: 'MontserratAlternates_700Bold',
+        fontSize: 14,
+        color: '#383896',
+        marginBottom: 12,
+    },
+
+    textoinfoDetalle: {
+        color: '#555555',
+        fontFamily: 'MontserratAlternates_400Regular',
+        fontSize: 14,
+    },
+
+    textoPrecio: {
+        fontFamily: 'MontserratAlternates_700Bold',
+        fontSize: 25,
+        color: '#383896',
+        marginTop: 22,
+        marginBottom: 22,
     },
 
     botonComprar: {
