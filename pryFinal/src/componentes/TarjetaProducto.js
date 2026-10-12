@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 export default function TarjetaProducto({ producto, navigation }) {
     return (
         <TouchableOpacity style={styles.tarjeta}
+        //"DetalleProducto", {producto} = detalle para cada peluche
         onPress={() => navigation.navigate("DetalleProducto", {producto})}>
             <TouchableOpacity style={styles.botonCorazon}>
                 <Ionicons name="heart-outline" size={20} color="#383896" />

@@ -11,16 +11,21 @@ import Perfil from './pantallas/Perfil';
 import DetalleProducto from './src/componentes/DetalleProducto';
 
 function Pantallas() {
+  //Fuentes de la página
   const [fuentesListas] = useFonts({
     MontserratAlternates_400Regular,
     MontserratAlternates_700Bold,
     DynaPuff_400Regular,
   });
 
+  //Si la autenticación todavía está cargando datos del usuario
   const { cargando } = useAuth();
+  
+  //"Inicio" = pantalla por defecto
   const [pantallaActual, setPantallaActual] = useState('Inicio');
 
-  //Ver el datalle del peluche
+  //Ver el datalle del peluche seleccionado
+  //Empieza con null
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   
   const navigation = {
@@ -33,6 +38,7 @@ function Pantallas() {
     goBack: () => setPantallaActual('Catalogo'), //volver a catálogo
   };
 
+  //Si las fuentes todavía aún no cargan, la app no renderiza nada
   if (!fuentesListas || cargando) {
     return null;
   }
@@ -62,6 +68,7 @@ function Pantallas() {
     return <Perfil navigation={navigation} />;
   }
 
+  //Pantalla por defecto
   return <Inicio navigation={navigation} />;
 }
 
