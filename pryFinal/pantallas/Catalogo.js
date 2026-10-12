@@ -18,7 +18,8 @@ export default function Catalogo ({ navigation }) {
         { id: 9, nombre: 'Perrito', precio: 65.90, categoria: 'Animales', imagen: require('../imagenes/perro.png') },
         { id: 10, nombre: 'Usagi', precio: 120.90, categoria: 'Anime', imagen: require('../imagenes/usagi.png') },
         { id: 11, nombre: 'Spider-Man', precio: 89.90, categoria: 'Peliculas', imagen: require('../imagenes/spiderman.png') },
-        { id: 12, nombre: 'Beluga', precio: 50.90, categoria: 'Animales', imagen: require("../imagenes/belugaa.png") }
+        { id: 12, nombre: 'Beluga', precio: 50.90, categoria: 'Animales', imagen: require("../imagenes/belugaa.png") },
+        { id: 13, nombre: "Momonga", precio: 450.90, categoria: "Anime", imagen: require("../imagenes/momonga.png") }
     ];
 
     const categorias = ['Todos', 'Animales', 'Anime', 'Juegos', 'Peliculas'];
