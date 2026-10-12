@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#BDA6CE',
         padding: 10,
         borderRadius: 10,
-        marginBottom: 16,
+        marginBottom: 16
     },
 
     filaLogo: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     botones: {
         alignItems: 'center',
         gap: 14,
-        marginTop: 32,
+        marginTop: 32
     },
 
     boton: {

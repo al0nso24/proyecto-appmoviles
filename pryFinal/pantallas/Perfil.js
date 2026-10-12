@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF8F0',
         padding: 16,
         paddingTop: 60,
+        paddingBottom: 60
     },
 
     titulo: {
