@@ -4,6 +4,7 @@ import TarjetaProducto from '../src/componentes/TarjetaProducto';
 import NavBar from '../src/componentes/NavBar';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAuth } from '../src/contexto/AuthContext';
+import { productos, MAS_VENDIDOS } from '../src/datos/productos';
 
 export default function Inicio ({ navigation }) {
     //Se trae la info del usuario desde el contexto de autenticación
@@ -19,10 +20,7 @@ export default function Inicio ({ navigation }) {
     ];
 
     //Peluches más vendidos
-    const masVendidos = [
-        { id: 1, nombre: 'Chiikawa', precio: 65.90, imagen: require('../imagenes/chiikawafondo.png')},
-        { id: 2, nombre: 'Hachiware', precio: 59.90, imagen: require('../imagenes/hachifondo.png')},
-    ];
+    const masVendidos = productos.filter((producto) => MAS_VENDIDOS.includes(producto.id));
 
     return (
         <View style={styles.contenedor}>
@@ -42,7 +40,11 @@ export default function Inicio ({ navigation }) {
                     <View style={styles.filaCategorias}>
                         {categorias.map((categoria) => (
                         <View key={categoria.nombre} style={styles.itemCategoria}>
-                            <TouchableOpacity style={styles.botonCategoria}>
+                            {/*Al tocar una categoría se abre el catálogo ya filtrado*/}
+                            <TouchableOpacity
+                            style={styles.botonCategoria}
+                            onPress={() => navigation && navigation.navigate('Catalogo', { categoria: categoria.filtro })}
+                            >
                             <MaterialCommunityIcons name={categoria.icono} size={58} color="#383896" />
                             </TouchableOpacity>
                             <Text style={styles.textoCategoria}>{categoria.nombre}</Text>
