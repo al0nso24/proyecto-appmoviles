@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useCarrito } from '../contexto/CarritoContext';
 
 //producto = el objeto completo
 //navigation = ir a la sección de "DetalleProducto"
 export default function TarjetaProducto({ producto, navigation }) {
+    const { agregarAlCarrito } = useCarrito();
+    const [agregado, setAgregado] = useState(false);
+    const temporizador = useRef(null);
+
+    useEffect(() => () => clearTimeout(temporizador.current), []);
+
+    const agregar = () => {
+        agregarAlCarrito(producto, 1);
+        setAgregado(true);
+        clearTimeout(temporizador.current);
+        temporizador.current = setTimeout(() => setAgregado(false), 900);
+    };
+
     return (
         <TouchableOpacity style={styles.tarjeta}
-        //"DetalleProducto", {producto} = detalle para cada peluche
         onPress={() => navigation.navigate("DetalleProducto", {producto})}>
             <TouchableOpacity style={styles.botonCorazon}>
                 <Ionicons name="heart-outline" size={20} color="#383896" />
@@ -16,9 +29,16 @@ export default function TarjetaProducto({ producto, navigation }) {
             <Text style={styles.nombre}>{producto.nombre}</Text>
             <View style={styles.filaPrecio}>
                 {/*Dos decimales*/}
-                <Text style={styles.precio}>S/. {producto.precio.toFixed(2)}</Text>
-                <TouchableOpacity style={styles.botonAgregar}>
-                    <Text style={styles.textoAgregar}>+</Text>
+                <Text style={styles.precio}>S/{producto.precio.toFixed(2)}</Text>
+                <TouchableOpacity
+                    style={[styles.botonAgregar, agregado && styles.botonAgregado]}
+                    onPress={agregar}
+                >
+                    <Ionicons
+                        name={agregado ? 'checkmark' : 'add'}
+                        size={18}
+                        color={agregado ? '#FFFFFF' : '#383896'}
+                    />
                 </TouchableOpacity>
             </View>
         </TouchableOpacity>
@@ -81,10 +101,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    
-    textoAgregar: {
-        color: '#383896',
-        fontSize: 16,
-        fontWeight: 'bold',
+
+    botonAgregado: {
+        backgroundColor: '#383896',
     },
 });

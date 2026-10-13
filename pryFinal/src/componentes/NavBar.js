@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Image, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexto/AuthContext';
+import { useCarrito } from '../contexto/CarritoContext';
 
 const OPCIONES = [
     { nombre: 'Inicio', pantalla: 'Inicio', icono: 'home-outline' },
@@ -13,9 +14,9 @@ const OPCIONES = [
     { nombre: 'Perfil', pantalla: 'Perfil', icono: 'person-circle-outline' },
 ];
 
-const DISPONIBLES = ['Inicio', 'Catalogo', 'Perfil', 'Login', 'Registro'];
+const DISPONIBLES = ['Inicio', 'Catalogo', 'Carrito', 'Perfil', 'Login', 'Registro'];
 
-function Cabecera({ icono, onLogo, onMenu }) {
+function Cabecera({ icono, onLogo, onMenu, insignia = 0 }) {
     return (
         <View style={styles.encabezado}>
             <TouchableOpacity style={styles.filaLogo} onPress={onLogo}>
@@ -25,6 +26,11 @@ function Cabecera({ icono, onLogo, onMenu }) {
 
             <TouchableOpacity onPress={onMenu}>
                 <Ionicons name={icono} size={28} color="#383896" />
+                {insignia > 0 && (
+                    <View style={styles.insignia}>
+                        <Text style={styles.textoInsignia}>{insignia > 9 ? '9+' : insignia}</Text>
+                    </View>
+                )}
             </TouchableOpacity>
         </View>
     );
@@ -32,6 +38,7 @@ function Cabecera({ icono, onLogo, onMenu }) {
 
 export default function NavBar({ navigation }) {
     const { usuario } = useAuth();
+    const { cantidadTotal } = useCarrito();
     const [abierto, setAbierto] = useState(false);
     const [aviso, setAviso] = useState('');
 
@@ -53,6 +60,7 @@ export default function NavBar({ navigation }) {
         <>
             <Cabecera
                 icono="menu"
+                insignia={cantidadTotal}
                 onLogo={() => navigation && navigation.navigate('Inicio')}
                 onMenu={() => setAbierto(true)}
             />
@@ -76,6 +84,11 @@ export default function NavBar({ navigation }) {
                                     <Ionicons name={opcion.icono} size={28} color="#383896" />
                                 </View>
                                 <Text style={styles.textoOpcion}>{opcion.nombre}</Text>
+                                {opcion.pantalla === 'Carrito' && cantidadTotal > 0 && (
+                                    <View style={styles.insigniaOpcion}>
+                                        <Text style={styles.textoInsignia}>{cantidadTotal}</Text>
+                                    </View>
+                                )}
                             </TouchableOpacity>
                         ))}
                     </View>
@@ -186,6 +199,33 @@ const styles = StyleSheet.create({
 
     textoBoton: {
         color: '#fff',
+        fontFamily: 'MontserratAlternates_700Bold',
+    },
+    insignia: {
+        position: 'absolute',
+        top: -6,
+        right: -8,
+        minWidth: 18,
+        height: 18,
+        borderRadius: 9,
+        backgroundColor: '#383896',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 4,
+    },
+    insigniaOpcion: {
+        marginLeft: 10,
+        minWidth: 22,
+        height: 22,
+        borderRadius: 11,
+        backgroundColor: '#383896',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 5,
+    },
+    textoInsignia: {
+        color: '#fff',
+        fontSize: 11,
         fontFamily: 'MontserratAlternates_700Bold',
     },
 });

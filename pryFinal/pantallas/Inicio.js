@@ -13,10 +13,10 @@ export default function Inicio ({ navigation }) {
 
     //Categorías de los peluches
     const categorias = [
-        { nombre: 'Animales', icono: 'paw' },
-        { nombre: 'Anime', icono: 'star-four-points-outline' },
-        { nombre: 'Juegos', icono: 'gamepad-variant-outline' },
-        { nombre: 'Películas', icono: 'movie-open-outline' },
+        { nombre: 'Animales', filtro: 'Animales', icono: 'paw' },
+        { nombre: 'Anime', filtro: 'Anime', icono: 'star-four-points-outline' },
+        { nombre: 'Juegos', filtro: 'Juegos', icono: 'gamepad-variant-outline' },
+        { nombre: 'Películas', filtro: 'Peliculas', icono: 'movie-open-outline' },
     ];
 
     //Peluches más vendidos
