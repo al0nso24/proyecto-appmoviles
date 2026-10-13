@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import NavBar from '../src/componentes/NavBar';
@@ -7,6 +7,8 @@ import { useAuth } from '../src/contexto/AuthContext';
 
 export default function Login({ navigation }) {
     const { iniciarSesion } = useAuth();
+    //useRef: referencia al campo de contraseña para pasar el cursor desde el correo
+    const passwordRef = useRef(null);
     const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
     const [verPassword, setVerPassword] = useState(false);
@@ -69,11 +71,14 @@ export default function Login({ navigation }) {
                     autoCorrect={false}
                     value={correo}
                     onChangeText={setCorreo}
+                    returnKeyType="next"
+                    onSubmitEditing={() => passwordRef.current && passwordRef.current.focus()}
                 />
 
                 <Text style={styles.etiqueta}>Contraseña:</Text>
                 <View style={styles.campoPassword}>
                     <TextInput
+                        ref={passwordRef}
                         style={styles.input}
                         placeholder=""
                         secureTextEntry={!verPassword}

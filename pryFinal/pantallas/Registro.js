@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import NavBar from '../src/componentes/NavBar';
@@ -7,6 +7,10 @@ import { useAuth } from '../src/contexto/AuthContext';
 
 export default function Registro({ navigation }) {
     const { registrarse } = useAuth();
+    //useRef: referencias para pasar el cursor de un campo al siguiente
+    const correoRef = useRef(null);
+    const passwordRef = useRef(null);
+    const confirmarRef = useRef(null);
     const [nombre, setNombre] = useState('');
     const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
@@ -76,10 +80,13 @@ export default function Registro({ navigation }) {
                     autoCapitalize="words"
                     value={nombre}
                     onChangeText={setNombre}
+                    returnKeyType="next"
+                    onSubmitEditing={() => correoRef.current && correoRef.current.focus()}
                 />
 
                 <Text style={styles.etiqueta}>Correo electrónico:</Text>
                 <TextInput
+                    ref={correoRef}
                     style={styles.input}
                     placeholder=""
                     keyboardType="email-address"
@@ -87,11 +94,14 @@ export default function Registro({ navigation }) {
                     autoCorrect={false}
                     value={correo}
                     onChangeText={setCorreo}
+                    returnKeyType="next"
+                    onSubmitEditing={() => passwordRef.current && passwordRef.current.focus()}
                 />
 
                 <Text style={styles.etiqueta}>Contraseña:</Text>
                 <View style={styles.campoPassword}>
                     <TextInput
+                        ref={passwordRef}
                         style={styles.input}
                         placeholder="Mínimo 6 caracteres"
                         secureTextEntry={!verPassword}
@@ -99,6 +109,8 @@ export default function Registro({ navigation }) {
                         autoCorrect={false}
                         value={password}
                         onChangeText={setPassword}
+                        returnKeyType="next"
+                        onSubmitEditing={() => confirmarRef.current && confirmarRef.current.focus()}
                     />
                     <TouchableOpacity style={styles.ojo} onPress={() => setVerPassword(!verPassword)}>
                         <Ionicons name={verPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#383896" />
@@ -107,6 +119,7 @@ export default function Registro({ navigation }) {
 
                 <Text style={styles.etiqueta}>Confirmar contraseña:</Text>
                 <TextInput
+                    ref={confirmarRef}
                     style={styles.input}
                     placeholder=""
                     secureTextEntry={!verPassword}
