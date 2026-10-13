@@ -7,6 +7,8 @@ import Catalogo from './pantallas/Catalogo';
 import Login from './pantallas/Login';
 import Registro from './pantallas/Registro';
 import { AuthProvider, useAuth } from './src/contexto/AuthContext';
+import { CarritoProvider } from './src/contexto/CarritoContext';
+import Carrito from './pantallas/Carrito';
 import Perfil from './pantallas/Perfil';
 import DetalleProducto from './src/componentes/DetalleProducto';
 
@@ -27,11 +29,16 @@ function Pantallas() {
   //Ver el datalle del peluche seleccionado
   //Empieza con null
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+
+  const [categoriaInicial, setCategoriaInicial] = useState('Todos');
   
   const navigation = {
     navigate: (pantalla, parametros) => {
       if (pantalla === 'DetalleProducto') {
         setProductoSeleccionado(parametros.producto);
+      }
+      if (pantalla === 'Catalogo') {
+        setCategoriaInicial((parametros && parametros.categoria) || 'Todos');
       }
       setPantallaActual(pantalla);
     },
@@ -44,7 +51,7 @@ function Pantallas() {
   }
 
   if (pantallaActual === 'Catalogo') {
-    return <Catalogo navigation={navigation} />;
+    return <Catalogo navigation={navigation} categoriaInicial={categoriaInicial} />;
   }
 
   if (pantallaActual === 'DetalleProducto') {
@@ -54,6 +61,10 @@ function Pantallas() {
         producto={productoSeleccionado}
       />
     );
+  }
+
+  if (pantallaActual === 'Carrito') {
+    return <Carrito navigation={navigation} />;
   }
 
   if (pantallaActual === 'Login') {
@@ -75,7 +86,9 @@ function Pantallas() {
 export default function App() {
   return (
     <AuthProvider>
-      <Pantallas />
+      <CarritoProvider>
+        <Pantallas />
+      </CarritoProvider>
     </AuthProvider>
   );
 }
