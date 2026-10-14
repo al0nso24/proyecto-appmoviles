@@ -21,6 +21,11 @@ export const productos = [
     { id: 20, nombre: 'Deadpool', precio: 89.00, categoria: 'Peliculas', imagen: require('../../imagenes/depul.jpg') },
     { id: 21, nombre: 'R2D2', precio: 69.00, categoria: 'Peliculas', imagen: require('../../imagenes/r2d2.jpg') },
     { id: 22, nombre: 'Iron Man', precio: 70.90, categoria: 'Peliculas', imagen: require('../../imagenes/ironman.jpg') },
+    { id: 23, nombre: 'Marionette', precio: 77.90, categoria: 'Juegos', imagen: require('../../imagenes/puppet.jpg') },
+    { id: 24, nombre: 'Fredbear', precio: 90.90, categoria: 'Juegos', imagen: require('../../imagenes/fredbear.jpg') },
+    { id: 25, nombre: 'Shy Guy', precio: 55.90, categoria: 'Juegos', imagen: require('../../imagenes/shyguy.jpg') },
+    { id: 26, nombre: 'Astro Bot', precio: 70.00, categoria: 'Juegos', imagen: require('../../imagenes/astrobot.jpg') },
+    { id: 27, nombre: 'Dreadbear', precio: 172.00, categoria: 'Juegos', imagen: require('../../imagenes/dreadbear.png') },
 ];
 
 export const CATEGORIAS = ['Todos', 'Animales', 'Anime', 'Juegos', 'Peliculas'];

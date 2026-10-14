@@ -29,7 +29,7 @@ export default function TarjetaProducto({ producto, navigation }) {
             <Text style={styles.nombre}>{producto.nombre}</Text>
             <View style={styles.filaPrecio}>
                 {/*Dos decimales*/}
-                <Text style={styles.precio}>S/{producto.precio.toFixed(2)}</Text>
+                <Text style={styles.precio}>S/ {producto.precio.toFixed(2)}</Text>
                 <TouchableOpacity
                     style={[styles.botonAgregar, agregado && styles.botonAgregado]}
                     onPress={agregar}
