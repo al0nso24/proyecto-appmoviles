@@ -12,6 +12,15 @@ export const productos = [
     { id: 11, nombre: 'Spider-Man', precio: 89.90, categoria: 'Peliculas', imagen: require('../../imagenes/spiderman.png') },
     { id: 12, nombre: 'Beluga', precio: 50.90, categoria: 'Animales', imagen: require('../../imagenes/belugaa.png') },
     { id: 13, nombre: 'Momonga', precio: 450.90, categoria: 'Anime', imagen: require('../../imagenes/momonga.png') },
+    { id: 14, nombre: 'Pingüino', precio: 55.90, categoria: 'Animales', imagen: require('../../imagenes/pinwino.jpg') },
+    { id: 15, nombre: 'Delfín', precio: 34.90, categoria: 'Animales', imagen: require('../../imagenes/delfin.jpg') },
+    { id: 16, nombre: 'Chiikabu', precio: 66.90, categoria: 'Anime', imagen: require('../../imagenes/chiikabu.jpg') },
+    { id: 17, nombre: 'Bulbasaur', precio: 79.90, categoria: 'Juegos', imagen: require('../../imagenes/bulbasaur.jpg') },
+    { id: 18, nombre: 'Cerdito', precio: 89.90, categoria: 'Animales', imagen: require('../../imagenes/cerdo.jpg') },
+    { id: 19, nombre: 'Creeper', precio: 69.90, categoria: 'Juegos', imagen: require('../../imagenes/creeper.jpg') },
+    { id: 20, nombre: 'Deadpool', precio: 89.00, categoria: 'Peliculas', imagen: require('../../imagenes/depul.jpg') },
+    { id: 21, nombre: 'R2D2', precio: 69.00, categoria: 'Peliculas', imagen: require('../../imagenes/r2d2.jpg') },
+    { id: 22, nombre: 'Iron Man', precio: 70.90, categoria: 'Peliculas', imagen: require('../../imagenes/ironman.jpg') },
 ];
 
 export const CATEGORIAS = ['Todos', 'Animales', 'Anime', 'Juegos', 'Peliculas'];
