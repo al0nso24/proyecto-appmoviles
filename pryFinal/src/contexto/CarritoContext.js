@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from './AuthContext';
-import { productoPorId } from '../datos/productos';
+import { useProductos } from './ProductosContext';
 
 export const MAX_UNIDADES = 10;
 
@@ -33,6 +33,7 @@ const CarritoContext = createContext(null);
 
 export function CarritoProvider({ children }) {
     const { usuario } = useAuth();
+    const { productoPorId } = useProductos();
     const clave = claveDe(usuario);
 
     const [carrito, setCarrito] = useState([]);
@@ -103,7 +104,7 @@ export function CarritoProvider({ children }) {
                     return producto ? { ...producto, cantidad, subtotal: producto.precio * cantidad } : null;
                 })
                 .filter(Boolean),
-        [carrito]
+        [carrito, productoPorId]
     );
     const total = useMemo(() => items.reduce((suma, i) => suma + i.subtotal, 0), [items]);
     const cantidadTotal = useMemo(() => items.reduce((suma, i) => suma + i.cantidad, 0), [items]);

@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
-import TarjetaProducto from '../componentes/TarjetaProducto';
-import NavBar from '../componentes/NavBar';
+import TarjetaProducto from '../src/componentes/TarjetaProducto';
+import NavBar from '../src/componentes/NavBar';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useAuth } from '../contexto/AuthContext';
-import { productos, MAS_VENDIDOS } from '../datos/productos';
+import { useAuth } from '../src/contexto/AuthContext';
+import { MAS_VENDIDOS } from '../src/datos/productos';
+import { useProductos } from '../src/contexto/ProductosContext';
 
 export default function Inicio ({ navigation }) {
     //Se trae la info del usuario desde el contexto de autenticación
     //useAuth() es un hook que devuelve los datos del login/usuario
     const { usuario } = useAuth();
+    const { productos } = useProductos();
 
     //Categorías de los peluches
     const categorias = [

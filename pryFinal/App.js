@@ -11,6 +11,11 @@ import { CarritoProvider } from './src/contexto/CarritoContext';
 import Carrito from './pantallas/Carrito';
 import Perfil from './pantallas/Perfil';
 import DetalleProducto from './src/componentes/DetalleProducto';
+import { ProductosProvider } from './src/contexto/ProductosContext';
+import AdminDashboard from './pantallas/AdminDashboard';
+import AdminProductos from './pantallas/AdminProductos';
+import AdminProductoForm from './pantallas/AdminProductoForm';
+import './src/servicios/notificaciones'; 
 
 function Pantallas() {
   //Fuentes de la página
@@ -21,21 +26,27 @@ function Pantallas() {
   });
 
   //Si la autenticación todavía está cargando datos del usuario
-  const { cargando } = useAuth();
+  const { cargando, usuario } = useAuth();
   
   //"Inicio" = pantalla por defecto
   const [pantallaActual, setPantallaActual] = useState('Inicio');
 
-  //Ver el datalle del peluche seleccionado
+  //Ver el detalle del peluche seleccionado
   //Empieza con null
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
   const [categoriaInicial, setCategoriaInicial] = useState('Todos');
+
+  //Producto que se edita en el panel de administrador 
+  const [productoEditando, setProductoEditando] = useState(null);
   
   const navigation = {
     navigate: (pantalla, parametros) => {
       if (pantalla === 'DetalleProducto') {
         setProductoSeleccionado(parametros.producto);
+      }
+      if (pantalla === 'AdminProductoForm') {
+        setProductoEditando((parametros && parametros.producto) || null);
       }
       if (pantalla === 'Catalogo') {
         setCategoriaInicial((parametros && parametros.categoria) || 'Todos');
@@ -48,6 +59,18 @@ function Pantallas() {
   //Si las fuentes todavía aún no cargan, la app no renderiza nada
   if (!fuentesListas || cargando) {
     return null;
+  }
+
+  //Pantallas del administrador: solo entra quien tiene rol "admin"
+  if (pantallaActual.startsWith('Admin')) {
+    if (!usuario || usuario.rol !== 'admin') {
+      return <Inicio navigation={navigation} />;
+    }
+    if (pantallaActual === 'AdminProductos') return <AdminProductos navigation={navigation} />;
+    if (pantallaActual === 'AdminProductoForm') {
+      return <AdminProductoForm navigation={navigation} producto={productoEditando} />;
+    }
+    return <AdminDashboard navigation={navigation} />;
   }
 
   if (pantallaActual === 'Catalogo') {
@@ -86,9 +109,11 @@ function Pantallas() {
 export default function App() {
   return (
     <AuthProvider>
-      <CarritoProvider>
-        <Pantallas />
-      </CarritoProvider>
+      <ProductosProvider>
+        <CarritoProvider>
+          <Pantallas />
+        </CarritoProvider>
+      </ProductosProvider>
     </AuthProvider>
   );
 }

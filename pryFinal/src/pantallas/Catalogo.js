@@ -4,13 +4,16 @@ import { Ionicons } from '@expo/vector-icons';
 import TarjetaProducto from '../src/componentes/TarjetaProducto';
 import NavBar from '../src/componentes/NavBar';
 import Paginacion from '../src/componentes/Paginacion';
-import { productos, CATEGORIAS } from '../src/datos/productos';
+import { CATEGORIAS } from '../src/datos/productos';
+import { useProductos } from '../src/contexto/ProductosContext';
+import useShake from '../src/hooks/useShake';
 
 const PRODUCTOS_POR_PAGINA = 8; 
 
 //categoriaInicial = categoría con la que se abre (por ejemplo, al tocar una categoría en Inicio)
 export default function Catalogo ({ navigation, categoriaInicial = 'Todos' }) {
     //useRef: referencias a la lista (para subir al inicio) y al buscador (para enfocarlo)
+    const { productos } = useProductos();
     const listaRef = useRef(null);
     const buscadorRef = useRef(null);
 
@@ -24,7 +27,7 @@ export default function Catalogo ({ navigation, categoriaInicial = 'Todos' }) {
         const productoBuscado = producto.nombre.toLowerCase().includes(busqueda.toLowerCase());
         const categoriaBuscada = categoriaSeleccionada === 'Todos' || producto.categoria === categoriaSeleccionada;
         return productoBuscado && categoriaBuscada;
-    }), [busqueda, categoriaSeleccionada]);
+    }), [productos, busqueda, categoriaSeleccionada]);
 
     const totalPaginas = Math.max(1, Math.ceil(productosFiltrados.length / PRODUCTOS_POR_PAGINA));
 
@@ -57,6 +60,14 @@ export default function Catalogo ({ navigation, categoriaInicial = 'Todos' }) {
         setPaginaActual(1);
         buscadorRef.current?.focus();
     }, []);
+
+    //Acelerómetro: al sacudir el celular se limpian búsqueda y categoría
+    const limpiarFiltros = useCallback(() => {
+        setBusqueda('');
+        setCategoriaSeleccionada('Todos');
+        setPaginaActual(1);
+    }, []);
+    useShake(limpiarFiltros);
 
     const encabezado = (
         <View>
@@ -105,6 +116,7 @@ export default function Catalogo ({ navigation, categoriaInicial = 'Todos' }) {
             <Text style={styles.contador}>
                 Mostrando {productosPaginados.length} de {productosFiltrados.length} peluches
             </Text>
+            <Text style={styles.contador}>Agita el celular para limpiar los filtros</Text>
         </View>
     );
 
