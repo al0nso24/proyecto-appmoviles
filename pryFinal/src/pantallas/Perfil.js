@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
-import NavBar from '../src/componentes/NavBar';
-import { useAuth } from '../src/contexto/AuthContext';
-import BotonUbicacion from '../src/componentes/BotonUbicacion';
-import SeccionNotificaciones from '../src/componentes/SeccionNotificaciones';
+import NavBar from '../componentes/NavBar';
+import { useAuth } from '../contexto/AuthContext';
+import BotonUbicacion from '../componentes/BotonUbicacion';
+import SeccionNotificaciones from '../componentes/SeccionNotificaciones';
 
 export default function Perfil({ navigation }) {
     const { usuario, actualizarPerfil, cerrarSesion } = useAuth();

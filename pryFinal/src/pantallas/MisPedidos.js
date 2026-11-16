@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import NavBar from '../src/componentes/NavBar';
-import { useAuth } from '../src/contexto/AuthContext';
-import { leerPedidosDeUsuario } from '../src/servicios/pedidosService';
+import NavBar from '../componentes/NavBar';
+import { useAuth } from '../contexto/AuthContext';
+import { leerPedidosDeUsuario } from '../servicios/pedidosService';
 
 export default function MisPedidos({ navigation }) {
     const { usuario } = useAuth();

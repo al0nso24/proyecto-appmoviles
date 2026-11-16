@@ -16,7 +16,7 @@ const OPCIONES = [
 
 const OPCION_ADMIN = { nombre: 'Panel admin', pantalla: 'AdminDashboard', icono: 'shield-checkmark-outline' };
 
-const DISPONIBLES = ['Inicio', 'Catalogo', 'Carrito', 'Perfil', 'Login', 'Registro', 'AdminDashboard', 'AdminProductos', 'AdminProductoForm'];
+const DISPONIBLES = ['Inicio', 'Catalogo', 'Carrito', 'Perfil', 'Pedidos', 'Login', 'Registro', 'AdminDashboard', 'AdminProductos', 'AdminProductoForm'];
 
 function Cabecera({ icono, onLogo, onMenu, insignia = 0 }) {
     return (

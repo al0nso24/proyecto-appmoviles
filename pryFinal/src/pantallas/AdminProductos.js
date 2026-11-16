@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { View, Text, TextInput, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import NavBar from '../src/componentes/NavBar';
-import ModalMensaje from '../src/componentes/ModalMensaje';
-import { useProductos } from '../src/contexto/ProductosContext';
+import NavBar from '../componentes/NavBar';
+import ModalMensaje from '../componentes/ModalMensaje';
+import { useProductos } from '../contexto/ProductosContext';
 
 export default function AdminProductos({ navigation }) {
     const { productos, eliminarProducto } = useProductos();

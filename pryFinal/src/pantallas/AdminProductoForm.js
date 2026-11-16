@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import NavBar from '../src/componentes/NavBar';
-import CamaraProducto from '../src/componentes/CamaraProducto';
-import ModalMensaje from '../src/componentes/ModalMensaje';
-import { useProductos } from '../src/contexto/ProductosContext';
-import { CATEGORIAS } from '../src/datos/productos';
-import { programarNotificacion, estadoPermisoNotificaciones } from '../src/servicios/notificaciones';
+import NavBar from '../componentes/NavBar';
+import CamaraProducto from '../componentes/CamaraProducto';
+import ModalMensaje from '../componentes/ModalMensaje';
+import { useProductos } from '../contexto/ProductosContext';
+import { CATEGORIAS } from '../datos/productos';
+import { programarNotificacion, estadoPermisoNotificaciones } from '../servicios/notificaciones';
 
 export default function AdminProductoForm({ navigation, producto }) {
     const { agregarProducto, editarProducto } = useProductos();

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import NavBar from '../src/componentes/NavBar';
-import { useProductos } from '../src/contexto/ProductosContext';
-import { leerPedidos } from '../src/servicios/pedidosService';
-import { contarUsuarios } from '../src/servicios/authService';
-import { CATEGORIAS } from '../src/datos/productos';
+import NavBar from '../componentes/NavBar';
+import { useProductos } from '../contexto/ProductosContext';
+import { leerPedidos } from '../servicios/pedidosService';
+import { contarUsuarios } from '../servicios/authService';
+import { CATEGORIAS } from '../datos/productos';
 
 function Tarjeta({ icono, valor, etiqueta }) {
     return (

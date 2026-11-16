@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import NavBar from '../src/componentes/NavBar';
-import ModalMensaje from '../src/componentes/ModalMensaje';
-import { useAuth } from '../src/contexto/AuthContext';
-import { useCarrito, MAX_UNIDADES } from '../src/contexto/CarritoContext';
-import { registrarPedido } from '../src/servicios/pedidosService';
-import { programarNotificacion } from '../src/servicios/notificaciones';
+import NavBar from '../componentes/NavBar';
+import ModalMensaje from '../componentes/ModalMensaje';
+import { useAuth } from '../contexto/AuthContext';
+import { useCarrito, MAX_UNIDADES } from '../contexto/CarritoContext';
+import { registrarPedido } from '../servicios/pedidosService';
+import { programarNotificacion } from '../servicios/notificaciones';
 
 export default function Carrito({ navigation }) {
     const { usuario } = useAuth();
