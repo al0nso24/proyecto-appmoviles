@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import NavBar from '../src/componentes/NavBar';
-import ModalMensaje from '../src/componentes/ModalMensaje';
-import { useAuth } from '../src/contexto/AuthContext';
+import NavBar from '../componentes/NavBar';
+import ModalMensaje from '../componentes/ModalMensaje';
+import { useAuth } from '../contexto/AuthContext';
 
 export default function Registro({ navigation }) {
     const { registrarse } = useAuth();
