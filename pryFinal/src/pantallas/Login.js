@@ -16,6 +16,7 @@ export default function Login({ navigation }) {
     const [cargando, setCargando] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [bienvenida, setBienvenida] = useState('');
+    const [esAdmin, setEsAdmin] = useState(false);
 
     useEffect(() => {
         if (submitted) {
@@ -31,6 +32,7 @@ export default function Login({ navigation }) {
         try {
             const usuario = await iniciarSesion({ correo, password });
             setSubmitted(true);
+            setEsAdmin(usuario.rol === 'admin');
             setBienvenida(usuario.nombre.split(' ')[0]);
         } catch (e) {
             setError(e.message);
@@ -41,7 +43,8 @@ export default function Login({ navigation }) {
 
     const continuar = () => {
         setBienvenida('');
-        navigation.navigate('Inicio');
+        // El administrador entra directo a su panel
+        navigation.navigate(esAdmin ? 'AdminDashboard' : 'Inicio');
     };
 
     return (

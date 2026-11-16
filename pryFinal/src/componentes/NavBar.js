@@ -12,10 +12,11 @@ const OPCIONES = [
     { nombre: 'Carrito', pantalla: 'Carrito', icono: 'cart-outline' },
     { nombre: 'Pedidos', pantalla: 'Pedidos', icono: 'reader-outline' },
     { nombre: 'Perfil', pantalla: 'Perfil', icono: 'person-circle-outline' },
-    { nombre: 'Mis pedidos', pantalla: 'MisPedidos', icono: 'receipt-outline' },
 ];
 
-const DISPONIBLES = ['Inicio', 'Catalogo', 'Carrito', 'Perfil', 'Login', 'Registro', 'MisPedidos', 'AdminDashboard', 'AdminProductos', 'AdminProductoForm'];
+const OPCION_ADMIN = { nombre: 'Panel admin', pantalla: 'AdminDashboard', icono: 'shield-checkmark-outline' };
+
+const DISPONIBLES = ['Inicio', 'Catalogo', 'Carrito', 'Perfil', 'Login', 'Registro', 'AdminDashboard', 'AdminProductos', 'AdminProductoForm'];
 
 function Cabecera({ icono, onLogo, onMenu, insignia = 0 }) {
     return (
@@ -40,6 +41,7 @@ function Cabecera({ icono, onLogo, onMenu, insignia = 0 }) {
 export default function NavBar({ navigation }) {
     const { usuario } = useAuth();
     const { cantidadTotal } = useCarrito();
+    const opciones = usuario && usuario.rol === 'admin' ? [...OPCIONES, OPCION_ADMIN] : OPCIONES;
     const [abierto, setAbierto] = useState(false);
     const [aviso, setAviso] = useState('');
 
@@ -70,15 +72,15 @@ export default function NavBar({ navigation }) {
                 <View style={styles.menu}>
                     <Cabecera
                         icono="close"
-                        onLogo={() => ir(OPCIONES[0])}
+                        onLogo={() => ir(opciones[0])}
                         onMenu={cerrarMenu}
                     />
 
                     <View style={styles.lista}>
-                        {OPCIONES.map((opcion, i) => (
+                        {opciones.map((opcion, i) => (
                             <TouchableOpacity
                                 key={opcion.pantalla}
-                                style={[styles.opcion, i === OPCIONES.length - 1 && styles.opcionUltima]}
+                                style={[styles.opcion, i === opciones.length - 1 && styles.opcionUltima]}
                                 onPress={() => ir(opcion)}
                             >
                                 <View style={styles.columnaIcono}>
