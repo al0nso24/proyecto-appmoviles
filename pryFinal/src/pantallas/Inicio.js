@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
-import TarjetaProducto from '../src/componentes/TarjetaProducto';
-import NavBar from '../src/componentes/NavBar';
+import TarjetaProducto from '../componentes/TarjetaProducto';
+import NavBar from '../componentes/NavBar';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useAuth } from '../src/contexto/AuthContext';
-import { MAS_VENDIDOS } from '../src/datos/productos';
-import { useProductos } from '../src/contexto/ProductosContext';
+import { useAuth } from '../contexto/AuthContext';
+import { MAS_VENDIDOS } from '../datos/productos';
+import { useProductos } from '../contexto/ProductosContext';
 
 export default function Inicio ({ navigation }) {
     //Se trae la info del usuario desde el contexto de autenticación
@@ -29,7 +29,7 @@ export default function Inicio ({ navigation }) {
             <ScrollView>
                 <NavBar navigation={navigation} />
                 <View style={styles.bienvenida}>
-                    <Image source={require('../imagenes/bannerinicio.png')} style={styles.imagenBanner} />
+                    <Image source={require('../../imagenes/bannerinicio.png')} style={styles.imagenBanner} />
                     <Text style={styles.tituloTienda}>Tienda de Peluches - Kubi</Text>
                     <Text style={styles.subtitulo}>Descubre a tu nuevo mejor amigo</Text>
                     <TouchableOpacity style={styles.botonCatalogo} onPress={() => navigation && navigation.navigate('Catalogo')}>

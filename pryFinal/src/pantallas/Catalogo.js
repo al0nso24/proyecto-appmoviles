@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import TarjetaProducto from '../src/componentes/TarjetaProducto';
-import NavBar from '../src/componentes/NavBar';
-import Paginacion from '../src/componentes/Paginacion';
-import { CATEGORIAS } from '../src/datos/productos';
-import { useProductos } from '../src/contexto/ProductosContext';
+import NavBar from '../componentes/NavBar';
+import Paginacion from '../componentes/Paginacion';
+import { CATEGORIAS } from '../datos/productos';
+import { useProductos } from '../contexto/ProductosContext';
 import useShake from '../src/hooks/useShake';
+import TarjetaProducto from '../componentes/TarjetaProducto';
 
 const PRODUCTOS_POR_PAGINA = 8; 
 
@@ -72,7 +72,7 @@ export default function Catalogo ({ navigation, categoriaInicial = 'Todos' }) {
     const encabezado = (
         <View>
             <NavBar navigation={navigation} />
-            <Image source={require('../imagenes/tiendabanner.jpg')} style={styles.imagenBanner} />
+            <Image source={require('../../imagenes/tiendabanner.jpg')} style={styles.imagenBanner} />
             <Text style={styles.tituloSeccion}>Buscar Productos</Text>
             <View style={styles.cajaBuscador}>
                 <TextInput

@@ -69,7 +69,7 @@ export default function Registro({ navigation }) {
                 <NavBar navigation={navigation} />
 
                 <View style={styles.encabezadoLogin}>
-                    <Image source={require('../imagenes/logo.png')} style={styles.imagenOso} />
+                    <Image source={require('../../imagenes/logo.png')} style={styles.imagenOso} />
                     <Text style={styles.tituloBienvenida}>Crea tu Cuenta</Text>
                 </View>
                 <Text style={styles.subtitulo}>Únete a la familia Kubi</Text>

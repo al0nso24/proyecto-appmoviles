@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import NavBar from '../src/componentes/NavBar';
-import ModalMensaje from '../src/componentes/ModalMensaje';
-import { useAuth } from '../src/contexto/AuthContext';
+import NavBar from '../componentes/NavBar';
+import ModalMensaje from '../componentes/ModalMensaje';
+import { useAuth } from '../contexto/AuthContext';
 
 export default function Login({ navigation }) {
     const { iniciarSesion } = useAuth();
@@ -57,7 +57,7 @@ export default function Login({ navigation }) {
                 <NavBar navigation={navigation} />
 
                 <View style={styles.encabezadoLogin}>
-                    <Image source={require('../imagenes/logo.png')} style={styles.imagenOso} />
+                    <Image source={require('../../imagenes/logo.png')} style={styles.imagenOso} />
                     <Text style={styles.tituloBienvenida}>Bienvenidos a Kuby</Text>
                 </View>
                 <Text style={styles.subtitulo}>Iniciar Sesión para continuar</Text>
