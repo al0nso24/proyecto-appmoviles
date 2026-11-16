@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import NavBar from '../src/componentes/NavBar';
 import { useAuth } from '../src/contexto/AuthContext';
+import BotonUbicacion from '../src/componentes/BotonUbicacion';
+import SeccionNotificaciones from '../src/componentes/SeccionNotificaciones';
 
 export default function Perfil({ navigation }) {
     const { usuario, actualizarPerfil, cerrarSesion } = useAuth();
@@ -83,7 +85,10 @@ export default function Perfil({ navigation }) {
 
                 <Text style={styles.etiqueta}>Dirección:</Text>
                 {editando ? (
-                    <TextInput style={styles.input} value={direccion} onChangeText={setDireccion} />
+                    <>
+                        <TextInput style={styles.input} value={direccion} onChangeText={setDireccion} />
+                        <BotonUbicacion onDireccion={setDireccion} />
+                    </>
                 ) : (
                     <Text style={styles.valor}>{usuario.direccion || 'Sin registrar'}</Text>
                 )}
@@ -113,6 +118,14 @@ export default function Perfil({ navigation }) {
                         </TouchableOpacity>
                     </>
                 )}
+
+                {usuario.rol === 'admin' && (
+                    <TouchableOpacity style={styles.botonPrincipal} onPress={() => navigation.navigate('AdminDashboard')}>
+                        <Text style={styles.textoBotonPrincipal}>Ir al panel de administrador</Text>
+                    </TouchableOpacity>
+                )}
+
+                <SeccionNotificaciones />
             </ScrollView>
         </View>
     );

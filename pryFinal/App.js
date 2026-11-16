@@ -15,7 +15,7 @@ import { ProductosProvider } from './src/contexto/ProductosContext';
 import AdminDashboard from './pantallas/AdminDashboard';
 import AdminProductos from './pantallas/AdminProductos';
 import AdminProductoForm from './pantallas/AdminProductoForm';
-import './src/servicios/notificaciones'; 
+import './src/servicios/notificaciones'; // registra el manejador global de notificaciones
 
 function Pantallas() {
   //Fuentes de la página
@@ -31,13 +31,13 @@ function Pantallas() {
   //"Inicio" = pantalla por defecto
   const [pantallaActual, setPantallaActual] = useState('Inicio');
 
-  //Ver el detalle del peluche seleccionado
+  //Ver el datalle del peluche seleccionado
   //Empieza con null
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
   const [categoriaInicial, setCategoriaInicial] = useState('Todos');
 
-  //Producto que se edita en el panel de administrador 
+  //Producto que se edita en el panel de administrador (null = nuevo)
   const [productoEditando, setProductoEditando] = useState(null);
   
   const navigation = {
