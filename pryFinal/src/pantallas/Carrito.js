@@ -5,6 +5,8 @@ import NavBar from '../src/componentes/NavBar';
 import ModalMensaje from '../src/componentes/ModalMensaje';
 import { useAuth } from '../src/contexto/AuthContext';
 import { useCarrito, MAX_UNIDADES } from '../src/contexto/CarritoContext';
+import { registrarPedido } from '../src/servicios/pedidosService';
+import { programarNotificacion } from '../src/servicios/notificaciones';
 
 export default function Carrito({ navigation }) {
     const { usuario } = useAuth();
@@ -12,13 +14,23 @@ export default function Carrito({ navigation }) {
     const [pedido, setPedido] = useState(null);
     const [pedirLogin, setPedirLogin] = useState(false);
 
-    const pagar = () => {
+    const pagar = async () => {
         if (!usuario) {
             setPedirLogin(true);
             return;
         }
-        setPedido({ nombre: usuario.nombre.split(' ')[0], total });
+        const resumen = { nombre: usuario.nombre.split(' ')[0], total };
+        // El pedido se guarda para que el administrador lo vea en su panel
+        await registrarPedido({
+            usuarioId: usuario.id,
+            cliente: usuario.nombre,
+            items: items.map((i) => ({ id: i.id, nombre: i.nombre, precio: i.precio, cantidad: i.cantidad })),
+            total,
+        });
+        setPedido(resumen);
         vaciarCarrito();
+        // Notificación local en 5 s (pide el permiso si todavía no se concedió)
+        programarNotificacion('¡Pedido confirmado!', `Gracias ${resumen.nombre}, tu pedido de S/ ${total.toFixed(2)} está en preparación.`, 5).catch(() => {});
     };
 
     const renderItem = ({ item }) => (

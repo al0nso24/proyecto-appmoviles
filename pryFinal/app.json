@@ -26,7 +26,25 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Kubi usa la cámara para tomar la foto de los productos."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Kubi usa tu ubicación para completar tu dirección de entrega."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#383896"
+        }
+      ]
     ]
   }
 }

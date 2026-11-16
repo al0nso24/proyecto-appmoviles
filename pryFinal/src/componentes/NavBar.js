@@ -12,9 +12,10 @@ const OPCIONES = [
     { nombre: 'Carrito', pantalla: 'Carrito', icono: 'cart-outline' },
     { nombre: 'Pedidos', pantalla: 'Pedidos', icono: 'reader-outline' },
     { nombre: 'Perfil', pantalla: 'Perfil', icono: 'person-circle-outline' },
+    { nombre: 'Mis pedidos', pantalla: 'MisPedidos', icono: 'receipt-outline' },
 ];
 
-const DISPONIBLES = ['Inicio', 'Catalogo', 'Carrito', 'Perfil', 'Login', 'Registro'];
+const DISPONIBLES = ['Inicio', 'Catalogo', 'Carrito', 'Perfil', 'Login', 'Registro', 'MisPedidos', 'AdminDashboard', 'AdminProductos', 'AdminProductoForm'];
 
 function Cabecera({ icono, onLogo, onMenu, insignia = 0 }) {
     return (

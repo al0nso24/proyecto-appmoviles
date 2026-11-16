@@ -16,6 +16,7 @@ import AdminDashboard from './pantallas/AdminDashboard';
 import AdminProductos from './pantallas/AdminProductos';
 import AdminProductoForm from './pantallas/AdminProductoForm';
 import './src/servicios/notificaciones'; // registra el manejador global de notificaciones
+import MisPedidos from './pantallas/MisPedidos';
 
 function Pantallas() {
   //Fuentes de la página
@@ -73,9 +74,15 @@ function Pantallas() {
     return <AdminDashboard navigation={navigation} />;
   }
 
+  if (pantallaActual === 'MisPedidos') {
+    return <MisPedidos navigation={navigation} />;
+  }
+  
   if (pantallaActual === 'Catalogo') {
     return <Catalogo navigation={navigation} categoriaInicial={categoriaInicial} />;
   }
+
+  
 
   if (pantallaActual === 'DetalleProducto') {
     return (
