@@ -9,12 +9,17 @@ const REGEX_TELEFONO = /^[0-9+\s-]{7,15}$/;
 
 const normalizarCorreo = (correo) => String(correo || '').trim().toLowerCase();
 
-const usuarioPublico = ({ id, nombre, correo, telefono, direccion }) => ({
+// Cuenta de administrador que se crea sola la primera vez (solo para pruebas del curso)
+export const ADMIN_CORREO = 'admin@kuby.com';
+const ADMIN_PASSWORD = 'Admin123';
+
+const usuarioPublico = ({ id, nombre, correo, telefono, direccion, rol }) => ({
     id,
     nombre,
     correo,
     telefono,
     direccion,
+    rol: rol || 'cliente',
 });
 
 async function generarSal() {
@@ -35,6 +40,27 @@ async function leerUsuarios() {
     }
 }
 
+// Crea el administrador si todavía no existe
+export async function asegurarAdmin() {
+    const usuarios = await leerUsuarios();
+    if (usuarios.some((u) => u.correo === ADMIN_CORREO)) return;
+    const sal = await generarSal();
+    const admin = {
+        id: 'admin',
+        nombre: 'Administrador',
+        correo: ADMIN_CORREO,
+        rol: 'admin',
+        sal,
+        hash: await hashear(ADMIN_PASSWORD, sal),
+    };
+    await AsyncStorage.setItem(CLAVE_USUARIOS, JSON.stringify([...usuarios, admin]));
+}
+
+export async function contarUsuarios() {
+    const usuarios = await leerUsuarios();
+    return usuarios.filter((u) => u.rol !== 'admin').length;
+}
+
 export async function registrar({ nombre, correo, password }) {
     nombre = (nombre || '').trim();
     correo = normalizarCorreo(correo);
@@ -53,6 +79,7 @@ export async function registrar({ nombre, correo, password }) {
         id: Date.now().toString(),
         nombre,
         correo,
+        rol: 'cliente',
         sal,
         hash: await hashear(password, sal),
     };
@@ -65,6 +92,13 @@ export async function iniciarSesion({ correo, password }) {
     correo = normalizarCorreo(correo);
 
     if (!correo || !password) throw new Error('Ingresa tu correo y contraseña.');
+
+    // Por si la cuenta admin no se creó al abrir la app, se asegura aquí también
+    try {
+        await asegurarAdmin();
+    } catch (e) {
+        console.log('No se pudo crear el admin:', e);
+    }
 
     const usuarios = await leerUsuarios();
     const usuario = usuarios.find((u) => u.correo === correo);

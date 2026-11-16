@@ -8,7 +8,9 @@ export function AuthProvider({ children }) {
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        auth.obtenerSesion()
+        auth.asegurarAdmin()
+            .catch((e) => console.log('No se pudo crear el admin:', e))
+            .then(() => auth.obtenerSesion())
             .then(setUsuario)
             .catch(() => setUsuario(null))
             .finally(() => setCargando(false));
